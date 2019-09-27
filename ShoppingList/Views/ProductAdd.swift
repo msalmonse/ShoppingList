@@ -20,6 +20,8 @@ struct ProductAddLink: View {
 struct ProductAdd: View {
     @Environment(\.managedObjectContext)
     var managedObjectContext
+    @Environment(\.presentationMode)
+    var mode: Binding<PresentationMode>
 
     @State
     var name = ""
@@ -32,10 +34,14 @@ struct ProductAdd: View {
                     let product = Product(context: self.managedObjectContext)
                     product.id = UUID()
                     product.name = self.name
+                    saveContext()
+                    self.mode.wrappedValue.dismiss()
                 },
-                label: { Text("Add")})
+                label: { Text("Add")}
+            )
+            .disabled(name.isEmpty)
         }
-
+        .padding(.horizontal, 20)
     }
 }
 

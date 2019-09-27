@@ -20,6 +20,8 @@ struct StoreAddLink: View {
 struct StoreAdd: View {
     @Environment(\.managedObjectContext)
     var managedObjectContext
+    @Environment(\.presentationMode)
+    var mode: Binding<PresentationMode>
 
     @State
     var name = ""
@@ -35,12 +37,15 @@ struct StoreAdd: View {
                     let store = Store(context: self.managedObjectContext)
                     store.id = UUID()
                     store.name = self.name
-                    store.branch = self.branch
+                    store.branch = self.branch.isEmpty ? nil : self.branch
                     saveContext()
+                    self.mode.wrappedValue.dismiss()
                 },
-                label: { Text("Add")})
+                label: { Text("Add")}
+            )
+            .disabled(name.isEmpty)
         }
-
+        .padding(.horizontal, 20)
     }
 }
 
