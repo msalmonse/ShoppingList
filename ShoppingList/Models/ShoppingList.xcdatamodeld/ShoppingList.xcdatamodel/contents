@@ -10,7 +10,7 @@
         <relationship name="whichStore" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Store" inverseName="howMuch" inverseEntity="Store"/>
     </entity>
     <entity name="Store" representedClassName="Store" syncable="YES" codeGenerationType="class">
-        <attribute name="branch" optional="YES"/>
+        <attribute name="branch" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="howMuch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quantity" inverseName="whichStore" inverseEntity="Quantity"/>
     </entity>
