@@ -7,42 +7,25 @@
 //
 
 import SwiftUI
-import CoreData
+import UIKit
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext)
-    var managedObjectContext
 
-    @FetchRequest(
-        entity: Store.entity(),
-        sortDescriptors: []
-    )
-    var stores: FetchedResults<Store>
-
-    @FetchRequest(
-        entity: Product.entity(),
-        sortDescriptors: []
-    )
-    var products: FetchedResults<Product>
+    init() {
+        let appearance = UINavigationBar.appearance()
+        appearance.barTintColor =
+            UIColor(hue: 0.5, saturation: 0.5, brightness: 1.0, alpha: 1.0)
+    }
 
     var body: some View {
-        NavigationView {
-            HStack {
-                VStack {
-                    StoreAddLink()
-                    List(stores, id: \.self) { store in
-                        VStack {
-                            Text(store.name ?? "")
-                            Text(store.branch ?? "")
-                        }
-                    }
+        ZStack {
+            Color(hue: 0.5, saturation: 0.1, brightness: 1.0)
+            NavigationView {
+                HStack {
+                    StoresView()
+                    ProductsView()
                 }
-                VStack {
-                    ProductAddLink()
-                    List(products, id: \.self) { product in
-                        Text(product.name)
-                    }
-                }
+            .navigationBarTitle(Text("Shopping List"), displayMode: .inline)
             }
         }
     }
