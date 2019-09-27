@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="19A573a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Product" representedClassName="Product" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="howMuch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quantity" inverseName="whichProcuct" inverseEntity="Quantity"/>
+    </entity>
+    <entity name="Quantity" representedClassName="Quantity" syncable="YES" codeGenerationType="class">
+        <attribute name="quantity" optional="YES" attributeType="String"/>
+        <relationship name="whichProcuct" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="howMuch" inverseEntity="Product"/>
+        <relationship name="whichStore" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Store" inverseName="howMuch" inverseEntity="Store"/>
+    </entity>
+    <entity name="Store" representedClassName="Store" syncable="YES" codeGenerationType="class">
+        <attribute name="branch" optional="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="howMuch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quantity" inverseName="whichStore" inverseEntity="Quantity"/>
+    </entity>
+    <elements>
+        <element name="Store" positionX="-1178.73828125" positionY="-137.80078125" width="128" height="88"/>
+        <element name="Product" positionX="-1179.26171875" positionY="-247.71875" width="128" height="73"/>
+        <element name="Quantity" positionX="-940.81640625" positionY="-194.97265625" width="128" height="88"/>
+    </elements>
+</model>

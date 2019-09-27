@@ -1,0 +1,14 @@
+disabled_rules:
+  - comma
+  - identifier_name
+  - private_over_fileprivate
+  - redundant_optional_initialization
+  - trailing_comma
+  - type_name
+
+colon:
+  flexible_right_spacing: true
+
+excluded:
+  - ./*/AppDelegate.swift
+  - ./*/SceneDelegate.swift
