@@ -23,6 +23,10 @@
 		C410F0E6233F4C9400AF632D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0E5233F4C9400AF632D /* HomeView.swift */; };
 		C410F0E8233F4E8B00AF632D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0E7233F4E8B00AF632D /* Settings.swift */; };
 		C410F0EA233F647B00AF632D /* QuantityAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0E9233F647B00AF632D /* QuantityAdd.swift */; };
+		C410F0EC233FDF1700AF632D /* StoreExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0EB233FDF1700AF632D /* StoreExtension.swift */; };
+		C410F0EE233FDFE500AF632D /* ProductExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0ED233FDFE500AF632D /* ProductExtension.swift */; };
+		C410F0F0233FE10300AF632D /* StoreSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0EF233FE10300AF632D /* StoreSelector.swift */; };
+		C410F0F2233FE89100AF632D /* QuantityExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0F1233FE89000AF632D /* QuantityExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +60,10 @@
 		C410F0E5233F4C9400AF632D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C410F0E7233F4E8B00AF632D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		C410F0E9233F647B00AF632D /* QuantityAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityAdd.swift; sourceTree = "<group>"; };
+		C410F0EB233FDF1700AF632D /* StoreExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreExtension.swift; sourceTree = "<group>"; };
+		C410F0ED233FDFE500AF632D /* ProductExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductExtension.swift; sourceTree = "<group>"; };
+		C410F0EF233FE10300AF632D /* StoreSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSelector.swift; sourceTree = "<group>"; };
+		C410F0F1233FE89000AF632D /* QuantityExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +137,11 @@
 		C410F0D7233DC8C800AF632D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C410F0D4233D2B8900AF632D /* ShoppingList.xcdatamodeld */,
 				C410F0DD233DE30F00AF632D /* PersistContext.swift */,
+				C410F0ED233FDFE500AF632D /* ProductExtension.swift */,
+				C410F0F1233FE89000AF632D /* QuantityExtension.swift */,
+				C410F0D4233D2B8900AF632D /* ShoppingList.xcdatamodeld */,
+				C410F0EB233FDF1700AF632D /* StoreExtension.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -145,6 +156,7 @@
 				C410F0E9233F647B00AF632D /* QuantityAdd.swift */,
 				C410F0E7233F4E8B00AF632D /* Settings.swift */,
 				C410F0D9233DDB9200AF632D /* StoreAdd.swift */,
+				C410F0EF233FE10300AF632D /* StoreSelector.swift */,
 				C410F0DF233DE7A100AF632D /* StoresView.swift */,
 			);
 			path = Views;
@@ -257,11 +269,15 @@
 				C410F0DE233DE30F00AF632D /* PersistContext.swift in Sources */,
 				C410F0EA233F647B00AF632D /* QuantityAdd.swift in Sources */,
 				C410F0E6233F4C9400AF632D /* HomeView.swift in Sources */,
+				C410F0EC233FDF1700AF632D /* StoreExtension.swift in Sources */,
+				C410F0EE233FDFE500AF632D /* ProductExtension.swift in Sources */,
+				C410F0F0233FE10300AF632D /* StoreSelector.swift in Sources */,
 				C410F0E8233F4E8B00AF632D /* Settings.swift in Sources */,
 				C410F0B0233D2B3700AF632D /* AppDelegate.swift in Sources */,
 				C410F0B7233D2B3700AF632D /* ContentView.swift in Sources */,
 				C410F0D6233D2B8900AF632D /* ShoppingList.xcdatamodeld in Sources */,
 				C410F0B2233D2B3700AF632D /* SceneDelegate.swift in Sources */,
+				C410F0F2233FE89100AF632D /* QuantityExtension.swift in Sources */,
 				C410F0E2233DE82400AF632D /* ProductsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

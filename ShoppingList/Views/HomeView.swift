@@ -18,9 +18,28 @@ struct HomeView: View {
     )
     var entries: FetchedResults<Quantity>
 
+    @FetchRequest(
+        entity: Store.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Store.name, ascending: true)
+        ]
+    )
+    var stores: FetchedResults<Store>
+
+    @State
+    var storeIndex = -1
+
+    func selectedStore() -> Store? {
+        if !stores.indices.contains(storeIndex) { return nil }
+        return stores[storeIndex]
+    }
+
     var body: some View {
-        List(entries, id: \.self) {
-            EntryRow(entry: $0)
+        VStack {
+            StoreSelector(index: $storeIndex, stores: stores)
+            List(entries.filter({ $0.storeFilter(selectedStore()) }), id: \.self) {
+                EntryRow(entry: $0)
+            }
         }
     }
 }
@@ -41,8 +60,8 @@ struct EntryRow: View {
     var body: some View {
         HStack {
             Text(entry.quantity ?? "")
-            Text(product?.name ?? "")
-            Text(store?.name ?? "Any")
+            Text(product?.title ?? "")
+            Text(store?.title ?? "Any")
         }
     }
 }

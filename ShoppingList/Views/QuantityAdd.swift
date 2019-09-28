@@ -43,12 +43,7 @@ struct QuantityAdd: View {
                 }
             }
 
-            Picker(selection: $storeIndex, label: Text("Store")) {
-                Text("Any").tag(-1)
-                ForEach(stores.indices, id: \.self) { index in
-                    Text(self.stores[index].name ?? "").tag(index)
-                }
-            }
+           StoreSelector(index: $storeIndex, stores: stores)
 
             TextField("Quantity", text: $value)
             Button(
