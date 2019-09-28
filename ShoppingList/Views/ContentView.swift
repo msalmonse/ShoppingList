@@ -11,21 +11,29 @@ import UIKit
 
 struct ContentView: View {
 
-    init() {
-        let appearance = UINavigationBar.appearance()
-        appearance.barTintColor =
-            UIColor(hue: 0.5, saturation: 0.5, brightness: 1.0, alpha: 1.0)
-    }
-
     var body: some View {
-        ZStack {
-            Color(hue: 0.5, saturation: 0.1, brightness: 1.0)
-            NavigationView {
-                HStack(alignment: .top) {
-                    StoresView()
-                    ProductsView()
-                }
-            .navigationBarTitle(Text("Shopping List"), displayMode: .inline)
+        TabView {
+            HomeView()
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Home")
+            }
+
+            ProductsView()
+                .tabItem {
+                    Image(systemName: "rectangle.stack")
+                    Text("Products")
+            }
+
+            StoresView()
+                .tabItem {
+                    Image(systemName: "cart")
+                    Text("Stores")
+            }
+            Settings()
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")
             }
         }
     }

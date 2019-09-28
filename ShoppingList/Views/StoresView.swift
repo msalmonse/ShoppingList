@@ -22,7 +22,7 @@ struct StoresView: View {
 
     var body: some View {
         VStack {
-            StoreAddLink()
+            StoreAdd()
             List(stores, id: \.self) { store in
                 StoreRow(store: store)
             }
