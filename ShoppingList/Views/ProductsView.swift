@@ -24,8 +24,32 @@ struct ProductsView: View {
         VStack {
             ProductAddLink()
             List(products, id: \.self) { product in
-                Text(product.name ?? "")
+                ProductRow(product: product)
             }
+        }
+    }
+}
+
+struct ProductRow: View {
+    @Environment(\.managedObjectContext)
+    var managedObjectContext
+
+    let product: Product
+
+    var body: some View {
+        HStack {
+            VStack {
+                Text(product.name ?? "").font(.headline)
+                Text(product.manufacturer ?? "").font(.subheadline)
+            }
+            Spacer()
+            Button(
+                action: {
+                    self.managedObjectContext.delete(self.product)
+                    self.managedObjectContext.persist()
+                },
+                label: { Image(systemName: "clear").foregroundColor(.red) }
+            )
         }
     }
 }

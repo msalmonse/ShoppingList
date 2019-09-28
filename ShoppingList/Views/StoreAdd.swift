@@ -38,7 +38,10 @@ struct StoreAdd: View {
                     store.id = UUID()
                     store.name = self.name
                     store.branch = self.branch.isEmpty ? nil : self.branch
-                    saveContext()
+                    self.managedObjectContext.persist()
+                    // clean up for next time
+                    self.name = ""
+                    self.branch = ""
                     self.mode.wrappedValue.dismiss()
                 },
                 label: { Text("Add")}

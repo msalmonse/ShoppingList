@@ -21,7 +21,7 @@ struct ContentView: View {
         ZStack {
             Color(hue: 0.5, saturation: 0.1, brightness: 1.0)
             NavigationView {
-                HStack {
+                HStack(alignment: .top) {
                     StoresView()
                     ProductsView()
                 }

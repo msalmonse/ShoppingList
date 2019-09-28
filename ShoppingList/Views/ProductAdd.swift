@@ -25,19 +25,26 @@ struct ProductAdd: View {
 
     @State
     var name = ""
+    @State
+    var manufacturer = ""
 
     var body: some View {
         VStack {
             TextField("Product name", text: $name)
+            TextField("Product manufacturer", text: $manufacturer)
             Button(
                 action: {
                     let product = Product(context: self.managedObjectContext)
                     product.id = UUID()
                     product.name = self.name
-                    saveContext()
+                    product.manufacturer = self.manufacturer
+                    self.managedObjectContext.persist()
+                    // Clean up for next time
+                    self.name = ""
+                    self.manufacturer = ""
                     self.mode.wrappedValue.dismiss()
                 },
-                label: { Text("Add")}
+                label: { Text("Add") }
             )
             .disabled(name.isEmpty)
         }

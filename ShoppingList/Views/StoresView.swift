@@ -24,11 +24,32 @@ struct StoresView: View {
         VStack {
             StoreAddLink()
             List(stores, id: \.self) { store in
-                VStack {
-                    Text(store.name ?? "")
-                    Text(store.branch ?? "")
-                }
+                StoreRow(store: store)
             }
+        }
+    }
+}
+
+struct StoreRow: View {
+    @Environment(\.managedObjectContext)
+    var managedObjectContext
+
+    let store: Store
+
+    var body: some View {
+        HStack {
+            VStack {
+                Text(store.name ?? "").font(.headline)
+                Text(store.branch ?? "").font(.subheadline)
+            }
+            Spacer()
+            Button(
+                action: {
+                    self.managedObjectContext.delete(self.store)
+                    self.managedObjectContext.persist()
+                },
+                label: { Image(systemName: "clear").foregroundColor(.red) }
+            )
         }
     }
 }

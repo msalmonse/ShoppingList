@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="19A573a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Product" representedClassName="Product" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="manufacturer" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="howMuch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quantity" inverseName="whichProcuct" inverseEntity="Quantity"/>
     </entity>
@@ -18,7 +19,7 @@
         <relationship name="howMuch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quantity" inverseName="whichStore" inverseEntity="Quantity"/>
     </entity>
     <elements>
-        <element name="Product" positionX="-1179.26171875" positionY="-247.71875" width="128" height="88"/>
+        <element name="Product" positionX="-1179.26171875" positionY="-247.71875" width="128" height="103"/>
         <element name="Quantity" positionX="-940.81640625" positionY="-194.97265625" width="128" height="103"/>
         <element name="Store" positionX="-1178.73828125" positionY="-137.80078125" width="128" height="103"/>
     </elements>
