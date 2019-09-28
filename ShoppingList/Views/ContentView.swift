@@ -19,6 +19,12 @@ struct ContentView: View {
                     Text("Home")
             }
 
+            QuantityAdd()
+                .tabItem {
+                    Image(systemName: "plus.rectangle.on.rectangle")
+                    Text("Add")
+            }
+
             ProductsView()
                 .tabItem {
                     Image(systemName: "rectangle.stack")

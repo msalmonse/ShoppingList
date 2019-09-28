@@ -22,6 +22,7 @@
 		C410F0E2233DE82400AF632D /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0E1233DE82400AF632D /* ProductsView.swift */; };
 		C410F0E6233F4C9400AF632D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0E5233F4C9400AF632D /* HomeView.swift */; };
 		C410F0E8233F4E8B00AF632D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0E7233F4E8B00AF632D /* Settings.swift */; };
+		C410F0EA233F647B00AF632D /* QuantityAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F0E9233F647B00AF632D /* QuantityAdd.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		C410F0E1233DE82400AF632D /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
 		C410F0E5233F4C9400AF632D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C410F0E7233F4E8B00AF632D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		C410F0E9233F647B00AF632D /* QuantityAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityAdd.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,9 +142,10 @@
 				C410F0E5233F4C9400AF632D /* HomeView.swift */,
 				C410F0DB233DDDE600AF632D /* ProductAdd.swift */,
 				C410F0E1233DE82400AF632D /* ProductsView.swift */,
+				C410F0E9233F647B00AF632D /* QuantityAdd.swift */,
+				C410F0E7233F4E8B00AF632D /* Settings.swift */,
 				C410F0D9233DDB9200AF632D /* StoreAdd.swift */,
 				C410F0DF233DE7A100AF632D /* StoresView.swift */,
-				C410F0E7233F4E8B00AF632D /* Settings.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				C410F0DC233DDDE600AF632D /* ProductAdd.swift in Sources */,
 				C410F0E0233DE7A100AF632D /* StoresView.swift in Sources */,
 				C410F0DE233DE30F00AF632D /* PersistContext.swift in Sources */,
+				C410F0EA233F647B00AF632D /* QuantityAdd.swift in Sources */,
 				C410F0E6233F4C9400AF632D /* HomeView.swift in Sources */,
 				C410F0E8233F4E8B00AF632D /* Settings.swift in Sources */,
 				C410F0B0233D2B3700AF632D /* AppDelegate.swift in Sources */,
