@@ -47,6 +47,7 @@ struct HomeView: View {
 struct EntryRow: View {
     @Environment(\.managedObjectContext)
     var managedObjectContext
+    @ObservedObject
     var entry: Quantity
     var product: Product?
     var store: Store?
@@ -59,9 +60,22 @@ struct EntryRow: View {
 
     var body: some View {
         HStack {
+            Button(
+                action: {
+                    self.entry.completed.toggle()
+                    self.entry.objectWillChange.send()
+                    self.managedObjectContext.persist()
+                },
+                label: {
+                    Image(systemName: self.entry.completed ? "star.fill" : "star" )
+                    .foregroundColor(.yellow)
+                    .frame(width: 20, height: 20)
+                    .clipShape(Rectangle())
+                }
+            )
             Text(entry.quantity ?? "")
             Text(product?.title ?? "")
-            Text(store?.title ?? "Any")
+            Text("@" + (store?.title ?? "Any"))
         }
     }
 }

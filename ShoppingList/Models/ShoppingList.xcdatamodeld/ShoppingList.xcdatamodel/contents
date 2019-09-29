@@ -7,6 +7,7 @@
         <relationship name="howMuch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quantity" inverseName="whichProcuct" inverseEntity="Quantity"/>
     </entity>
     <entity name="Quantity" representedClassName="Quantity" syncable="YES" codeGenerationType="class">
+        <attribute name="completed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="quantity" optional="YES" attributeType="String"/>
         <relationship name="whichProcuct" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Product" inverseName="howMuch" inverseEntity="Product"/>
@@ -20,7 +21,7 @@
     </entity>
     <elements>
         <element name="Product" positionX="-1179.26171875" positionY="-247.71875" width="128" height="103"/>
-        <element name="Quantity" positionX="-940.81640625" positionY="-194.97265625" width="128" height="103"/>
+        <element name="Quantity" positionX="-940.81640625" positionY="-194.97265625" width="128" height="118"/>
         <element name="Store" positionX="-1178.73828125" positionY="-137.80078125" width="128" height="103"/>
     </elements>
 </model>
