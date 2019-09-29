@@ -52,7 +52,6 @@ struct ProductAdd: View {
     }
 }
 
-
 struct ProductAdd_Previews: PreviewProvider {
     static var previews: some View {
         ProductAdd()
