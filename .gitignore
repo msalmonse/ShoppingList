@@ -1,11 +1,11 @@
 .DS_store
 
 ## User settings
-Cardiac.xcodeproj/project.xcworkspace/
-Cardiac.xcodeproj/xcuserdata/
-Cardiac.xcodeproj/xcshareddata/
+ShoppingList.xcodeproj/project.xcworkspace/
+ShoppingList.xcodeproj/xcuserdata/
+ShoppingList.xcodeproj/xcshareddata/
 ## previews
-Cardiac/Preview\ Content/
-Cardiac/iconGen_ColourViewer*/
+ShoppingList/Preview\ Content/
+ShoppingList/iconGen_ColourViewer*/
 ## app icons
 iconGen*/
