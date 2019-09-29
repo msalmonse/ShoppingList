@@ -58,6 +58,16 @@ struct ProductAdd: View {
     @Environment(\.managedObjectContext)
     var managedObjectContext
 
+    @FetchRequest(
+        entity: Category.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Category.name, ascending: true)
+        ]
+    )
+    var categories: FetchedResults<Category>
+
+    @State
+    var categoryIndex = -1
     @State
     var name = ""
     @State
@@ -67,9 +77,15 @@ struct ProductAdd: View {
         VStack {
             TextField("Product name", text: $name)
             TextField("Product manufacturer", text: $manufacturer)
+            CategorySelector(index: $categoryIndex, categories: categories)
             Button(
                 action: {
                     let product = Product(context: self.managedObjectContext)
+                    if self.categories.indices.contains(self.categoryIndex) {
+                        let category = self.categories[self.categoryIndex]
+                        product.category = category
+                        category.addToProducts(product)
+                    }
                     product.id = UUID()
                     product.name = self.name
                     product.manufacturer = self.manufacturer
