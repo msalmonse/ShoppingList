@@ -15,4 +15,14 @@ extension Quantity {
         if (whichStore?.count ?? 0) == 0 { return true }
         return whichStore?.contains(store!) ?? true
     }
+
+    var anyProduct: Product? {
+        guard let set = whichProcuct else { return nil }
+        return set.anyObject() as? Product
+    }
+
+    var anyStore: Store? {
+        guard let set = whichStore else { return nil }
+        return set.anyObject() as? Store
+    }
 }

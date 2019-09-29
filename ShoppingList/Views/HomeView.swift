@@ -54,8 +54,8 @@ struct EntryRow: View {
 
     init(entry: Quantity) {
         self.entry = entry
-        self.product = entry.whichProcuct?.first(where: { _ in return true }) as? Product
-        self.store = entry.whichStore?.first(where: { _ in return true }) as? Store
+        self.product = entry.anyProduct
+        self.store = entry.anyStore
     }
 
     var body: some View {
