@@ -54,6 +54,37 @@ struct ProductRow: View {
     }
 }
 
+struct ProductAdd: View {
+    @Environment(\.managedObjectContext)
+    var managedObjectContext
+
+    @State
+    var name = ""
+    @State
+    var manufacturer = ""
+
+    var body: some View {
+        VStack {
+            TextField("Product name", text: $name)
+            TextField("Product manufacturer", text: $manufacturer)
+            Button(
+                action: {
+                    let product = Product(context: self.managedObjectContext)
+                    product.id = UUID()
+                    product.name = self.name
+                    product.manufacturer = self.manufacturer
+                    self.managedObjectContext.persist()
+                    // Clean up for next time
+                    self.name = ""
+                    self.manufacturer = ""
+                },
+                label: { Text("Add") }
+            )
+            .disabled(name.isEmpty)
+        }
+        .padding(.horizontal, 20)
+    }
+}
 struct ProductsView_Previews: PreviewProvider {
     static var previews: some View {
         ProductsView()

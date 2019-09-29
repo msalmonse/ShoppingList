@@ -54,6 +54,38 @@ struct StoreRow: View {
     }
 }
 
+struct StoreAdd: View {
+    @Environment(\.managedObjectContext)
+    var managedObjectContext
+
+    @State
+    var name = ""
+    @State
+    var branch = ""
+
+    var body: some View {
+        VStack {
+            TextField("Store name", text: $name)
+            TextField("Store branch", text: $branch)
+            Button(
+                action: {
+                    let store = Store(context: self.managedObjectContext)
+                    store.id = UUID()
+                    store.name = self.name
+                    store.branch = self.branch.isEmpty ? nil : self.branch
+                    self.managedObjectContext.persist()
+                    // clean up for next time
+                    self.name = ""
+                    self.branch = ""
+                },
+                label: { Text("Add")}
+            )
+            .disabled(name.isEmpty)
+        }
+        .padding(.horizontal, 20)
+    }
+}
+
 struct StoresView_Previews: PreviewProvider {
     static var previews: some View {
         StoresView()
