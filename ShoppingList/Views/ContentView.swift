@@ -18,11 +18,17 @@ struct ContentView: View {
                     Image(systemName: "house")
                     Text("Home")
             }
-
+/*
             QuantityAdd()
                 .tabItem {
                     Image(systemName: "plus.rectangle.on.rectangle")
                     Text("Add")
+            }
+*/
+            CategoriesView()
+                .tabItem {
+                    Image(systemName: "tray.2")
+                    Text("Categories")
             }
 
             ProductsView()
@@ -36,6 +42,7 @@ struct ContentView: View {
                     Image(systemName: "cart")
                     Text("Stores")
             }
+
             Settings()
                 .tabItem {
                     Image(systemName: "gear")
