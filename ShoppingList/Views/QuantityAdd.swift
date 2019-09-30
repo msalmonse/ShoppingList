@@ -52,7 +52,7 @@ struct QuantityAdd: View {
                     quantity.id = UUID()
                     quantity.quantity = self.value
                     let product = self.products[self.productIndex]
-                    quantity.addToWhichProcuct(product)
+                    quantity.whichProcuct = product
                     product.addToHowMuch(quantity)
                     if self.storeIndex >= 0 {
                         let store = self.stores[self.storeIndex]

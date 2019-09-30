@@ -54,7 +54,7 @@ struct EntryRow: View {
 
     init(entry: Quantity) {
         self.entry = entry
-        self.product = entry.anyProduct
+        self.product = entry.whichProcuct
         self.store = entry.anyStore
     }
 

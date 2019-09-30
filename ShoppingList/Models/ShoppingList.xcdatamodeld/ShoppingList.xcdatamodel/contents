@@ -19,7 +19,7 @@
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="quantity" optional="YES" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="quantities" inverseEntity="Category"/>
-        <relationship name="whichProcuct" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Product" inverseName="howMuch" inverseEntity="Product"/>
+        <relationship name="whichProcuct" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="howMuch" inverseEntity="Product"/>
         <relationship name="whichStore" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Store" inverseName="howMuch" inverseEntity="Store"/>
     </entity>
     <entity name="Store" representedClassName="Store" syncable="YES" codeGenerationType="class">

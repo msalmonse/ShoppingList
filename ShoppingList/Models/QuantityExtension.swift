@@ -16,11 +16,6 @@ extension Quantity {
         return whichStore?.contains(store!) ?? true
     }
 
-    var anyProduct: Product? {
-        guard let set = whichProcuct else { return nil }
-        return set.anyObject() as? Product
-    }
-
     var anyStore: Store? {
         guard let set = whichStore else { return nil }
         return set.anyObject() as? Store
