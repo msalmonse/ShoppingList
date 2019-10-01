@@ -17,32 +17,37 @@ extension Category {
 
 class EditableCategory: ObservableObject, Identifiable {
     let id = UUID()
-    let category: Category?
+    var category: Category?
+
+    let isEdit: Bool
 
     let label: String
     @Published
     var name: String
 
-    func update(_ context: NSManagedObjectContext) {
+    func update() {
         if category != nil {
             category!.name = name
             category!.objectWillChange.send()
-        } else {
-            let newCategory = Category(context: context)
-            newCategory.id = UUID()
-            newCategory.name = name
         }
-        context.persist()
+    }
+
+    func add(context: NSManagedObjectContext) {
+        self.category = Category(context: context)
+        self.category!.id = UUID()
+        update()
     }
 
     init() {
         category = nil
+        isEdit = false
         label = "Add"
         name = ""
     }
 
     init(_ category: Category) {
         self.category = category
+        isEdit = true
         label = "Update"
         name = category.name ?? ""
     }

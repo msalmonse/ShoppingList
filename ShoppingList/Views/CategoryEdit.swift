@@ -6,39 +6,41 @@
 //  Copyright © 2019 mesme. All rights reserved.
 //
 
+import CoreData
 import SwiftUI
 
 struct CategoryEdit: View {
-    @Environment(\.managedObjectContext)
-    var managedObjectContext
     @Environment(\.presentationMode)
     var mode: Binding<PresentationMode>
 
     @ObservedObject
     var category: EditableCategory
+    var managedObjectContext: NSManagedObjectContext
 
-    init(_ category: EditableCategory) {
+    init(_ category: EditableCategory, context: NSManagedObjectContext) {
         self.category = category
+        self.managedObjectContext = context
+    }
+
+    func updateCategory() {
+        if category.isEdit {
+            category.update()
+        } else {
+            category.add(context: managedObjectContext)
+        }
+        managedObjectContext.persist()
+        mode.wrappedValue.dismiss()
     }
 
     var body: some View {
         VStack {
             TextField("Category name", text: $category.name)
             Button(
-                action: {
-                    self.category.update(self.managedObjectContext)
-                    self.mode.wrappedValue.dismiss()
-                },
+                action: { self.updateCategory() },
                 label: { Text(self.category.label) }
             )
             .disabled(category.name.isEmpty)
         }
         .padding(.horizontal, 20)
-    }
-}
-
-struct CategoryEdit_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryEdit(EditableCategory())
     }
 }

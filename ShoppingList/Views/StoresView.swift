@@ -35,7 +35,9 @@ struct StoresView: View {
                 label: { Text("New Store") }
             )
             Text("").hidden()
-            .sheet(isPresented: $trigger) { StoreEdit(EditableStore()) }
+            .sheet(isPresented: $trigger) {
+                StoreEdit(EditableStore(), context: self.managedObjectContext)
+            }
         }
     }
 }

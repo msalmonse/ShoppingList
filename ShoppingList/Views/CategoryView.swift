@@ -36,7 +36,9 @@ struct CategoriesView: View {
                 label: { Text("New Category") }
             )
             Text("").hidden()
-            .sheet(isPresented: $trigger) { CategoryEdit(EditableCategory()) }
+            .sheet(isPresented: $trigger) {
+                CategoryEdit(EditableCategory(), context: self.managedObjectContext)
+            }
         }
     }
 }

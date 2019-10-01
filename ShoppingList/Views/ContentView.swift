@@ -10,6 +10,8 @@ import SwiftUI
 import UIKit
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext)
+    var managedObjectContext
 
     var body: some View {
         TabView {
@@ -18,13 +20,8 @@ struct ContentView: View {
                     Image(systemName: "house")
                     Text("Home")
             }
-/*
-            QuantityAdd()
-                .tabItem {
-                    Image(systemName: "plus.rectangle.on.rectangle")
-                    Text("Add")
-            }
-*/
+//            .onReceive(Persist.trigger, perform: { self.managedObjectContext.persist() })
+
             CategoriesView()
                 .tabItem {
                     Image(systemName: "tray.2")

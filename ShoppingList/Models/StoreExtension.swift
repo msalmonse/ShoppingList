@@ -25,7 +25,7 @@ class EditableStore: ObservableObject, Identifiable {
     let id = UUID()
     private var store: Store?
 
-    var isEdit: Bool { return store != nil }
+    let isEdit: Bool
 
     @Published
     var branch: String
@@ -36,13 +36,13 @@ class EditableStore: ObservableObject, Identifiable {
     func update() {
         if store != nil {
             store!.name = name
-            store!.branch = branch
+            store!.branch = branch.isEmpty ? nil : branch
             store!.objectWillChange.send()
         }
     }
 
-    func add(_ store: Store) {
-        self.store = store
+    func add(context: NSManagedObjectContext) {
+        self.store = Store(context: context)
         self.store!.id = UUID()
         update()
     }
@@ -50,6 +50,7 @@ class EditableStore: ObservableObject, Identifiable {
     init() {
         store = nil
         branch = ""
+        isEdit = false
         label = "Add"
         name = ""
     }
@@ -57,6 +58,7 @@ class EditableStore: ObservableObject, Identifiable {
     init(_ store: Store) {
         self.store = store
         branch = store.branch ?? ""
+        isEdit = true
         label = "Update"
         name = store.name ?? ""
     }

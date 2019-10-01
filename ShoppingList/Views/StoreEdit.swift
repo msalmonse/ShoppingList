@@ -6,26 +6,27 @@
 //  Copyright © 2019 mesme. All rights reserved.
 //
 
+import CoreData
 import SwiftUI
 
 struct StoreEdit: View {
-    @Environment(\.managedObjectContext)
-    var managedObjectContext
     @Environment(\.presentationMode)
     var mode: Binding<PresentationMode>
 
     @ObservedObject
     var store: EditableStore
+    var managedObjectContext: NSManagedObjectContext
 
-    init(_ store: EditableStore) {
+    init(_ store: EditableStore, context: NSManagedObjectContext) {
         self.store = store
+        self.managedObjectContext = context
     }
 
     func updateStore() {
         if store.isEdit {
             store.update()
         } else {
-            store.add(Store(context: managedObjectContext))
+            store.add(context: managedObjectContext)
         }
         managedObjectContext.persist()
         mode.wrappedValue.dismiss()
@@ -50,11 +51,5 @@ struct StoreEdit: View {
             }
         }
         .padding(.horizontal, 20)
-    }
-}
-
-struct StoreEdit_Previews: PreviewProvider {
-    static var previews: some View {
-        StoreEdit(EditableStore())
     }
 }
