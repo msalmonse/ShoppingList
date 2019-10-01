@@ -20,12 +20,22 @@ struct StoresView: View {
     )
     var stores: FetchedResults<Store>
 
+    @State
+    var trigger: Bool = false
+
     var body: some View {
         VStack {
-            StoreAdd()
             List(stores, id: \.self) { store in
                 StoreRow(store: store)
             }
+            Button(
+                action: {
+                    self.trigger = true
+                },
+                label: { Text("New Store") }
+            )
+            Text("").hidden()
+            .sheet(isPresented: $trigger) { StoreEdit(EditableStore()) }
         }
     }
 }

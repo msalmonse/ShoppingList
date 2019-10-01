@@ -16,7 +16,11 @@ extension NSManagedObjectContext {
                 try self.save()
             } catch {
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                if nserror.code == 0 && nserror.domain == "Foundation._GenericObjCError" {
+                    print("Got invalid error from Objective-C")
+                } else {
+                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
             }
         }
     }

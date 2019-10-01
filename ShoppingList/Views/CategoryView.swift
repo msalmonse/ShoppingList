@@ -21,12 +21,22 @@ struct CategoriesView: View {
     )
     var categories: FetchedResults<Category>
 
+    @State
+    var trigger: Bool = false
+
     var body: some View {
         VStack {
-            CategoryAdd()
             List(categories, id: \.self) { category in
                 CategoryRow(category: category)
             }
+            Button(
+                action: {
+                    self.trigger = true
+                },
+                label: { Text("New Category") }
+            )
+            Text("").hidden()
+            .sheet(isPresented: $trigger) { CategoryEdit(EditableCategory()) }
         }
     }
 }
@@ -51,33 +61,6 @@ struct CategoryRow: View {
                 label: { Image(systemName: "clear").foregroundColor(.red) }
             )
         }
-    }
-}
-
-struct CategoryAdd: View {
-    @Environment(\.managedObjectContext)
-    var managedObjectContext
-
-    @State
-    var name = ""
-
-    var body: some View {
-        VStack {
-            TextField("Category name", text: $name)
-            Button(
-                action: {
-                    let category = Category(context: self.managedObjectContext)
-                    category.id = UUID()
-                    category.name = self.name
-                    self.managedObjectContext.persist()
-                    // clean up for next time
-                    self.name = ""
-                },
-                label: { Text("Add")}
-            )
-            .disabled(name.isEmpty)
-        }
-        .padding(.horizontal, 20)
     }
 }
 
