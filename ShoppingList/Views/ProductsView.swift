@@ -20,11 +20,23 @@ struct ProductsView: View {
     )
     var products: FetchedResults<Product>
 
+    @State
+    var trigger: Bool = false
+
     var body: some View {
         VStack {
-            ProductAdd()
             List(products, id: \.self) { product in
                 ProductRow(product: product)
+            }
+            Button(
+                action: {
+                    self.trigger = true
+                },
+                label: { Text("New Product") }
+            )
+            Text("").hidden()
+            .sheet(isPresented: $trigger) {
+                ProductEdit(EditableProduct(), context: self.managedObjectContext)
             }
         }
     }
@@ -54,53 +66,6 @@ struct ProductRow: View {
     }
 }
 
-struct ProductAdd: View {
-    @Environment(\.managedObjectContext)
-    var managedObjectContext
-
-    @FetchRequest(
-        entity: Category.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Category.name, ascending: true)
-        ]
-    )
-    var categories: FetchedResults<Category>
-
-    @State
-    var categoryIndex = -1
-    @State
-    var name = ""
-    @State
-    var manufacturer = ""
-
-    var body: some View {
-        VStack {
-            TextField("Product name", text: $name)
-            TextField("Product manufacturer", text: $manufacturer)
-            CategorySelector(index: $categoryIndex, categories: categories)
-            Button(
-                action: {
-                    let product = Product(context: self.managedObjectContext)
-                    if self.categories.indices.contains(self.categoryIndex) {
-                        let category = self.categories[self.categoryIndex]
-                        product.category = category
-                        category.addToProducts(product)
-                    }
-                    product.id = UUID()
-                    product.name = self.name
-                    product.manufacturer = self.manufacturer
-                    self.managedObjectContext.persist()
-                    // Clean up for next time
-                    self.name = ""
-                    self.manufacturer = ""
-                },
-                label: { Text("Add") }
-            )
-            .disabled(name.isEmpty)
-        }
-        .padding(.horizontal, 20)
-    }
-}
 struct ProductsView_Previews: PreviewProvider {
     static var previews: some View {
         ProductsView()
