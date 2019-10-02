@@ -34,8 +34,16 @@ struct StoreEdit: View {
 
     var body: some View {
         VStack {
-            TextField("Store name", text: $store.name)
-            TextField("Store branch", text: $store.branch)
+            TextField(
+                "Store name",
+                text: $store.name,
+                onCommit: { self.updateStore() }
+            )
+            TextField(
+                "Store branch",
+                text: $store.branch,
+                onCommit: { self.updateStore() }
+            )
             HStack {
                 Button(
                     action: {

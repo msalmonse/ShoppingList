@@ -34,7 +34,11 @@ struct CategoryEdit: View {
 
     var body: some View {
         VStack {
-            TextField("Category name", text: $category.name)
+            TextField(
+                "Category name",
+                text: $category.name,
+                onCommit: { self.updateCategory() }
+            )
             Button(
                 action: { self.updateCategory() },
                 label: { Text(self.category.label) }
