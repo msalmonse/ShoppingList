@@ -57,13 +57,15 @@ class EditableCategory: ObservableObject, Identifiable {
 
 class HasCategory: ObservableObject, Identifiable {
     let id = UUID()
+    let category: Category
     @Published
     var included: Bool
     let name: String
 
-    init(_ name: String, _ included: Bool) {
+    init(_ category: Category, _ included: Bool) {
+        self.category = category
         self.included = included
-        self.name = name
+        self.name = category.name ?? "???"
     }
 }
 

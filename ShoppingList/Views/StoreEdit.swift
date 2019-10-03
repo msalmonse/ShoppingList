@@ -28,11 +28,13 @@ struct StoreEdit: View {
         self.categories = categories
         self.managedObjectContext = context
         categoryList = categories.map {
-            HasCategory($0.name ?? "", self.store.categories.contains($0))
+            HasCategory($0, self.store.categories.contains($0))
         }
     }
 
     func updateStore() {
+        // update store.categories
+        store.categories = Set(categoryList.filter({ $0.included }).map({ $0.category }))
         if store.isEdit {
             store.update()
         } else {

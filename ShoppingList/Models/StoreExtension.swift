@@ -17,6 +17,12 @@ extension Store {
             return "\(name!) (\(branch!))"
         }
     }
+
+    var allCategoryNames: [String] {
+        if categories == nil { return [] }
+        let set = categories as! Set<Category>      // swiftlint:disable:this force_cast
+        return set.map({ $0.name! }).sorted()
+    }
 }
 
 // Object to edit or add a store

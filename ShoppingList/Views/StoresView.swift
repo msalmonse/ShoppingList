@@ -59,6 +59,12 @@ struct StoreRow: View {
     var managedObjectContext
 
     let store: Store
+    let allCategoryNames: [String]
+
+    init(store: Store) {
+        self.store = store
+        self.allCategoryNames = store.allCategoryNames
+    }
 
     var body: some View {
         HStack {
@@ -67,6 +73,11 @@ struct StoreRow: View {
                 Text(store.branch ?? "").font(.subheadline)
             }
             Spacer()
+            VStack {
+                ForEach(store.allCategoryNames, id: \.self) {
+                    Text($0 as String)
+                }
+            }
             Button(
                 action: {
                     self.managedObjectContext.delete(self.store)
