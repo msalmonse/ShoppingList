@@ -52,3 +52,30 @@ class EditableCategory: ObservableObject, Identifiable {
         name = category.name ?? ""
     }
 }
+
+// Class for CategoriesSelector
+
+class CategoriesSet {
+    let categories: [Category]
+    var hasCategory: Set<Category>
+
+    var indices: Range<Int> { return categories.indices }
+
+    init(_ categories: [Category], hasCategory: Set<Category>) {
+        self.categories = categories
+        self.hasCategory = hasCategory
+    }
+
+    subscript(index: Int) -> Category { return categories[index] }
+
+    subscript(index: Category) -> Bool {
+        get { return hasCategory.contains(index) }
+        set {
+            if newValue {
+                hasCategory.insert(index)
+            } else {
+                hasCategory.remove(index)
+            }
+        }
+    }
+}

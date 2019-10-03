@@ -27,7 +27,7 @@ struct CategoriesSelector: View {
     let categories: FetchedResults<Category>
 
     @State
-    var index: Int
+    var index: Int = 0
 
     var body: some View {
         Picker(selection: $index, label: Text("Category")) {
