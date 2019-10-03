@@ -13,6 +13,14 @@ struct ProductsView: View {
     var managedObjectContext
 
     @FetchRequest(
+        entity: Category.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Category.name, ascending: true)
+        ]
+    )
+    var categories: FetchedResults<Category>
+
+    @FetchRequest(
         entity: Product.entity(),
         sortDescriptors: [
             NSSortDescriptor(keyPath: \Product.name, ascending: true)
@@ -36,7 +44,11 @@ struct ProductsView: View {
             )
             Text("").hidden()
             .sheet(isPresented: $trigger) {
-                ProductEdit(EditableProduct(), context: self.managedObjectContext)
+                ProductEdit(
+                    EditableProduct(),
+                    context: self.managedObjectContext,
+                    categories: self.categories
+                )
             }
         }
     }
@@ -54,6 +66,8 @@ struct ProductRow: View {
                 Text(product.name ?? "").font(.headline)
                 Text(product.manufacturer ?? "").font(.subheadline)
             }
+            Spacer()
+            Text(product.category?.name ?? "")
             Spacer()
             Button(
                 action: {

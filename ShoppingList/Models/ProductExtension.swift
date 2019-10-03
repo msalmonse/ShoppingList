@@ -28,15 +28,20 @@ class EditableProduct: ObservableObject, Identifiable {
     let isEdit: Bool
 
     @Published
-    var manufacturer: String
+    var category: Category?
+    @Published
+    var categoryIndex = -1
     let label: String
+    @Published
+    var manufacturer: String
     @Published
     var name: String
 
     func update() {
         if product != nil {
-            product!.name = name
+            product!.category = category
             product!.manufacturer = manufacturer.isEmpty ? nil : manufacturer
+            product!.name = name
             product!.objectWillChange.send()
         }
     }
@@ -55,11 +60,13 @@ class EditableProduct: ObservableObject, Identifiable {
         name = ""
     }
 
-    init(_ product: Product) {
+    init(_ product: Product, categoryIndex: Int) {
         self.product = product
-        manufacturer = product.manufacturer ?? ""
+        category = product.category
+        self.categoryIndex = categoryIndex
         isEdit = true
         label = "Update"
+        manufacturer = product.manufacturer ?? ""
         name = product.name ?? ""
     }
 }

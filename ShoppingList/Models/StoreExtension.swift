@@ -28,6 +28,8 @@ class EditableStore: ObservableObject, Identifiable {
     let isEdit: Bool
 
     @Published
+    var categories: Set<Store> = []
+    @Published
     var branch: String
     let label: String
     @Published
@@ -58,6 +60,9 @@ class EditableStore: ObservableObject, Identifiable {
     init(_ store: Store) {
         self.store = store
         branch = store.branch ?? ""
+        if let storedCategories = store.categories {
+            categories = storedCategories as! Set<Store> // swiftlint:disable:this force_cast
+        }
         isEdit = true
         label = "Update"
         name = store.name ?? ""

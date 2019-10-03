@@ -16,13 +16,21 @@ struct ProductEdit: View {
     @ObservedObject
     var product: EditableProduct
     var managedObjectContext: NSManagedObjectContext
+    var categories: FetchedResults<Category>
 
-    init(_ product: EditableProduct, context: NSManagedObjectContext) {
+    init(
+        _ product: EditableProduct,
+        context: NSManagedObjectContext,
+        categories: FetchedResults<Category>
+    ) {
         self.product = product
         self.managedObjectContext = context
+        self.categories = categories
     }
 
     func updateProduct() {
+        let index = product.categoryIndex
+        product.category = categories.indices.contains(index) ? categories[index] : nil
         if product.isEdit {
             product.update()
         } else {
@@ -44,6 +52,7 @@ struct ProductEdit: View {
                 text: $product.manufacturer,
                 onCommit: { self.updateProduct() }
             )
+            CategorySelector(index: $product.categoryIndex, categories: categories)
             HStack {
                 Button(
                     action: {
