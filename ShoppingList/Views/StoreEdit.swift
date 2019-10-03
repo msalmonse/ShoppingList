@@ -16,10 +16,20 @@ struct StoreEdit: View {
     @ObservedObject
     var store: EditableStore
     var managedObjectContext: NSManagedObjectContext
+    var categories: FetchedResults<Category>
+    var categoryList: HasCategoryList = []
 
-    init(_ store: EditableStore, context: NSManagedObjectContext) {
+    init(
+        _ store: EditableStore,
+        context: NSManagedObjectContext,
+        categories: FetchedResults<Category>
+    ) {
         self.store = store
+        self.categories = categories
         self.managedObjectContext = context
+        categoryList = categories.map {
+            HasCategory($0.name ?? "", self.store.categories.contains($0))
+        }
     }
 
     func updateStore() {
@@ -44,6 +54,8 @@ struct StoreEdit: View {
                 text: $store.branch,
                 onCommit: { self.updateStore() }
             )
+            CategoriesSelector(categoriesList: categoryList)
+
             HStack {
                 Button(
                     action: {

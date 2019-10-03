@@ -53,29 +53,18 @@ class EditableCategory: ObservableObject, Identifiable {
     }
 }
 
-// Class for CategoriesSelector
+// List for CategoriesSelector
 
-class CategoriesSet {
-    let categories: [Category]
-    var hasCategory: Set<Category>
+class HasCategory: ObservableObject, Identifiable {
+    let id = UUID()
+    @Published
+    var included: Bool
+    let name: String
 
-    var indices: Range<Int> { return categories.indices }
-
-    init(_ categories: [Category], hasCategory: Set<Category>) {
-        self.categories = categories
-        self.hasCategory = hasCategory
-    }
-
-    subscript(index: Int) -> Category { return categories[index] }
-
-    subscript(index: Category) -> Bool {
-        get { return hasCategory.contains(index) }
-        set {
-            if newValue {
-                hasCategory.insert(index)
-            } else {
-                hasCategory.remove(index)
-            }
-        }
+    init(_ name: String, _ included: Bool) {
+        self.included = included
+        self.name = name
     }
 }
+
+typealias HasCategoryList = [HasCategory]

@@ -24,16 +24,39 @@ struct CategorySelector: View {
 }
 
 struct CategoriesSelector: View {
-    let categories: FetchedResults<Category>
+    let categoriesList: HasCategoryList
 
     @State
     var index: Int = 0
 
     var body: some View {
-        Picker(selection: $index, label: Text("Category")) {
-            ForEach(categories.indices, id: \.self) { index in
-                Text(self.categories[index].name ?? "").tag(index)
+        VStack {
+            Picker(selection: $index, label: Text("")) {
+                ForEach(categoriesList.indices, id: \.self) { index in
+                    CategoriesListRow(category: self.categoriesList[index]).tag(index)
+                }
             }
+            HStack {
+                Text("Category")
+                Button(
+                    action: {
+                        self.categoriesList[self.index].included.toggle()
+                    },
+                    label: { Text(categoriesList[index].included ? "Remove" : "Add") }
+                )
+            }
+        }
+    }
+}
+
+struct CategoriesListRow: View {
+    @ObservedObject
+    var category: HasCategory
+
+    var body: some View {
+        HStack {
+            Image(systemName: category.included ? "checkmark.square" : "square")
+            Text(category.name)
         }
     }
 }

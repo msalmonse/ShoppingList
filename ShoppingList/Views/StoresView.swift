@@ -13,6 +13,14 @@ struct StoresView: View {
     var managedObjectContext
 
     @FetchRequest(
+        entity: Category.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Category.name, ascending: true)
+        ]
+    )
+    var categories: FetchedResults<Category>
+
+    @FetchRequest(
         entity: Store.entity(),
         sortDescriptors: [
             NSSortDescriptor(keyPath: \Store.name, ascending: true)
@@ -36,7 +44,11 @@ struct StoresView: View {
             )
             Text("").hidden()
             .sheet(isPresented: $trigger) {
-                StoreEdit(EditableStore(), context: self.managedObjectContext)
+                StoreEdit(
+                    EditableStore(),
+                    context: self.managedObjectContext,
+                    categories: self.categories
+                )
             }
         }
     }
