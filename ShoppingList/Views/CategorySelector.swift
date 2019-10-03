@@ -36,16 +36,22 @@ struct CategoriesSelector: View {
                     CategoriesListRow(category: self.categoriesList[index]).tag(index)
                 }
             }
-            HStack {
-                Text("Category")
-                Button(
-                    action: {
-                        self.categoriesList[self.index].included.toggle()
-                    },
-                    label: { Text(categoriesList[index].included ? "Remove" : "Add") }
-                )
-            }
+            CategoryToggle(category: categoriesList[index])
         }
+    }
+}
+
+struct CategoryToggle: View {
+    @ObservedObject
+    var category: HasCategory
+
+    var body: some View {
+        Button(
+            action: {
+                self.category.included.toggle()
+            },
+            label: { Text("\(category.included ? "Remove" : "Add") Category") }
+        )
     }
 }
 
