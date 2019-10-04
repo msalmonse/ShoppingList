@@ -78,6 +78,7 @@ struct StoreRow: View {
                     Text($0 as String)
                 }
             }
+            Spacer()
             Button(
                 action: {
                     self.managedObjectContext.delete(self.store)

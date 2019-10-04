@@ -45,6 +45,8 @@ class EditableStore: ObservableObject, Identifiable {
         if store != nil {
             store!.name = name
             store!.branch = branch.isEmpty ? nil : branch
+            store!.categories = nil
+            if !categories.isEmpty { store!.addToCategories(categories as NSSet) }
             store!.objectWillChange.send()
         }
     }
