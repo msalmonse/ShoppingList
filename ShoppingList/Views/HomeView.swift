@@ -35,8 +35,8 @@ struct HomeView: View {
     }
 
     var body: some View {
-        VStack {
-            StoreSelector(index: $storeIndex, stores: stores)
+        VStack(alignment: .leading) {
+            SelectedStoreView(index: $storeIndex, stores: stores)
             List(entries.filter({ $0.storeFilter(selectedStore()) }), id: \.self) {
                 EntryRow(entry: $0)
             }
@@ -76,6 +76,36 @@ struct EntryRow: View {
             Text(entry.quantity ?? "")
             Text(product?.title ?? "")
             Text("@" + (store?.title ?? "Any"))
+        }
+    }
+}
+
+struct SelectedStoreView: View {
+    @Binding
+    var index: Int
+    let stores: FetchedResults<Store>
+
+    @State
+    var trigger: Bool = false
+
+    func storeTitle() -> String {
+        if !stores.indices.contains(index) { return "Any" }
+        return stores[index].title
+    }
+
+    var body: some View {
+        HStack {
+            Button(
+                action: { self.trigger = true },
+                label: { Text("Store: \(storeTitle())") }
+            )
+            Spacer()
+            Text(">")
+
+            Text("").hidden()
+            .sheet(isPresented: $trigger) {
+                StoreSelectorSheet(index: self.$index, stores: self.stores)
+            }
         }
     }
 }

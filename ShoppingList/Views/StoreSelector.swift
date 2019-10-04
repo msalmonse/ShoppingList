@@ -22,3 +22,22 @@ struct StoreSelector: View {
         }
     }
 }
+
+struct StoreSelectorSheet: View {
+    @Binding
+    var index: Int
+    let stores: FetchedResults<Store>
+
+    @Environment(\.presentationMode)
+    var mode: Binding<PresentationMode>
+
+    var body: some View {
+        VStack {
+            StoreSelector(index: $index, stores: stores)
+            Button(
+                action: { self.mode.wrappedValue.dismiss() },
+                label: { Text("Done") }
+            )
+        }
+    }
+}
