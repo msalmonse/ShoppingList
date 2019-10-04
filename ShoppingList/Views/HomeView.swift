@@ -13,6 +13,14 @@ struct HomeView: View {
     var managedObjectContext
 
     @FetchRequest(
+        entity: Product.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Product.name, ascending: true)
+        ]
+    )
+    var products: FetchedResults<Product>
+
+    @FetchRequest(
         entity: Quantity.entity(),
         sortDescriptors: []
     )
@@ -34,11 +42,32 @@ struct HomeView: View {
         return stores[storeIndex]
     }
 
+    @State
+    var trigger = false
+
     var body: some View {
         VStack(alignment: .leading) {
             SelectedStoreView(index: $storeIndex, stores: stores)
             List(entries.filter({ $0.storeFilter(selectedStore()) }), id: \.self) {
                 EntryRow(entry: $0)
+            }
+            HStack {
+                Spacer()
+                Button(
+                    action: { self.trigger = true },
+                    label: { Text("New Entry") }
+                )
+                Spacer()
+                Text("").hidden()
+                .sheet(isPresented: $trigger) {
+                    QuantityEdit(
+                        EditableQuantity(),
+                        context: self.managedObjectContext,
+                        products: self.products,
+                        stores: self.stores,
+                        storeIndex: self.$storeIndex
+                    )
+                }
             }
         }
     }

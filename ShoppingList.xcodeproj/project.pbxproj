@@ -32,6 +32,7 @@
 		C410F12A2343296D00AF632D /* CategoryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C410F1292343296D00AF632D /* CategoryExtension.swift */; };
 		C445877F234466F500AABDF2 /* ProductEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C445877E234466F500AABDF2 /* ProductEdit.swift */; };
 		C44587812345012E00AABDF2 /* SetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44587802345012E00AABDF2 /* SetExtension.swift */; };
+		C48492A12347C2D100AF8292 /* QuantityEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48492A02347C2D100AF8292 /* QuantityEdit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		C410F1292343296D00AF632D /* CategoryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryExtension.swift; sourceTree = "<group>"; };
 		C445877E234466F500AABDF2 /* ProductEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductEdit.swift; sourceTree = "<group>"; };
 		C44587802345012E00AABDF2 /* SetExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetExtension.swift; sourceTree = "<group>"; };
+		C48492A02347C2D100AF8292 /* QuantityEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityEdit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				C445877E234466F500AABDF2 /* ProductEdit.swift */,
 				C410F0E1233DE82400AF632D /* ProductsView.swift */,
 				C410F0E9233F647B00AF632D /* QuantityAdd.swift */,
+				C48492A02347C2D100AF8292 /* QuantityEdit.swift */,
 				C410F0E7233F4E8B00AF632D /* Settings.swift */,
 				C410F12523427CE000AF632D /* StoreEdit.swift */,
 				C410F0EF233FE10300AF632D /* StoreSelector.swift */,
@@ -313,6 +316,7 @@
 				C410F0EE233FDFE500AF632D /* ProductExtension.swift in Sources */,
 				C410F0F0233FE10300AF632D /* StoreSelector.swift in Sources */,
 				C44587812345012E00AABDF2 /* SetExtension.swift in Sources */,
+				C48492A12347C2D100AF8292 /* QuantityEdit.swift in Sources */,
 				C410F0E8233F4E8B00AF632D /* Settings.swift in Sources */,
 				C410F0B0233D2B3700AF632D /* AppDelegate.swift in Sources */,
 				C410F0B7233D2B3700AF632D /* ContentView.swift in Sources */,
