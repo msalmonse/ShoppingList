@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  EntriesView.swift
 //  ShoppingList
 //
 //  Created by Michael Salmon on 2019-09-28.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct EntriesView: View {
     @Environment(\.managedObjectContext)
     var managedObjectContext
 
@@ -186,6 +186,6 @@ struct SelectedStoreView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        EntriesView()
     }
 }

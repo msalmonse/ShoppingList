@@ -29,7 +29,7 @@ struct CategoryEdit: View {
             category.add(context: managedObjectContext)
         }
         managedObjectContext.persist()
-        mode.wrappedValue.dismiss()
+        if category.isEdit { mode.wrappedValue.dismiss() }
     }
 
     var body: some View {

@@ -41,7 +41,7 @@ struct StoreEdit: View {
             store.add(context: managedObjectContext)
         }
         managedObjectContext.persist()
-        mode.wrappedValue.dismiss()
+        if store.isEdit { mode.wrappedValue.dismiss() }
     }
 
     var body: some View {
