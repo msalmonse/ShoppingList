@@ -14,11 +14,12 @@ struct StoreSelector: View {
     let stores: FetchedResults<Store>
 
     var body: some View {
-        Picker(selection: $index, label: Text("Store")) {
+        Picker(selection: $index, label: Text("")) {
             Text("Any").tag(-1)
             ForEach(stores.indices, id: \.self) { index in
                 Text(self.stores[index].name ?? "").tag(index)
             }
+            Text("Store").bold()
         }
     }
 }

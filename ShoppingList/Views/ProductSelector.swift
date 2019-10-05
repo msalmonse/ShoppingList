@@ -14,10 +14,13 @@ struct ProductSelector: View {
     let products: FetchedResults<Product>
 
     var body: some View {
-        Picker(selection: $index, label: Text("Product")) {
-            ForEach(products.indices, id: \.self) { index in
-                Text(self.products[index].name ?? "").tag(index)
+        VStack {
+            Picker(selection: $index, label: Text("")) {
+                ForEach(products.indices, id: \.self) { index in
+                    Text(self.products[index].name ?? "").tag(index)
+                }
             }
+            Text("Product").bold()
         }
     }
 }

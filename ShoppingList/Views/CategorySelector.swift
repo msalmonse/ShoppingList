@@ -14,11 +14,12 @@ struct CategorySelector: View {
     let categories: FetchedResults<Category>
 
     var body: some View {
-        Picker(selection: $index, label: Text("Category")) {
+        Picker(selection: $index, label: Text("")) {
             Text("None").tag(-1)
             ForEach(categories.indices, id: \.self) { index in
                 Text(self.categories[index].name ?? "").tag(index)
             }
+            Text("Category").bold()
         }
     }
 }
@@ -36,6 +37,7 @@ struct CategoriesSelector: View {
                     CategoriesListRow(category: self.categoriesList[index]).tag(index)
                 }
             }
+            Text("Categories").bold()
             if categoriesList.indices.contains(index) {
                 CategoryToggle(category: categoriesList[index])
             }

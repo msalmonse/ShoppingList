@@ -79,9 +79,3 @@ struct ProductRow: View {
         }
     }
 }
-
-struct ProductsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductsView()
-    }
-}
