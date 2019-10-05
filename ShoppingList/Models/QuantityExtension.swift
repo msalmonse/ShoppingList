@@ -43,6 +43,11 @@ class EditableQuantity: ObservableObject, Identifiable {
 
     func update() {
         if entry != nil {
+            entry!.category = whichProduct?.category
+            entry!.quantity = quantity
+            entry!.whichProduct = whichProduct
+            entry!.whichStore = nil
+            if whichStore != nil { entry!.addToWhichStore(whichStore!) }
             entry!.objectWillChange.send()
         }
     }
@@ -69,7 +74,7 @@ class EditableQuantity: ObservableObject, Identifiable {
         isEdit = true
         label = "Update"
         quantity = entry.quantity ?? ""
-        whichProduct = entry.whichProcuct
+        whichProduct = entry.whichProduct
         whichStore = entry.anyStore
     }
 }

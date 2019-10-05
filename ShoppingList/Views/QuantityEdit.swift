@@ -39,6 +39,10 @@ struct QuantityEdit: View {
     }
 
     func updateQuantity() {
+        quantity.whichProduct =
+            products.indices.contains(productIndex) ? products[productIndex] : nil
+        quantity.whichStore =
+            stores.indices.contains(storeIndex) ? stores[storeIndex] : nil
         if quantity.isEdit {
             quantity.update()
         } else {
@@ -51,6 +55,7 @@ struct QuantityEdit: View {
     var body: some View {
         VStack {
             StoreSelector(index: $storeIndex, stores: stores)
+            ProductSelector(index: $productIndex, products: products)
             TextField("Quantity", text: $quantity.quantity)
             HStack {
                 Button(
