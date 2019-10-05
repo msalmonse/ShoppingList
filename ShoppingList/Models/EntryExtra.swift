@@ -1,5 +1,5 @@
 //
-//  QuantityExtension.swift
+//  EntryExtra.swift
 //  ShoppingList
 //
 //  Created by Michael Salmon on 2019-09-28.
@@ -9,25 +9,25 @@
 import Foundation
 import CoreData
 
-extension Quantity {
+extension Entry {
     func storeFilter(_ store: Store?) -> Bool {
         if store == nil { return true }
         // Check for no store selected, i.e. Any
-        if (whichStore?.count ?? 0) == 0 { return true }
-        return whichStore?.contains(store!) ?? true
+        if (stores?.count ?? 0) == 0 { return true }
+        return stores?.contains(store!) ?? true
     }
 
     var anyStore: Store? {
-        guard let set = whichStore else { return nil }
+        guard let set = stores else { return nil }
         return set.anyObject() as? Store
     }
 }
 
 // Class for adding or editing quantities
 
-class EditableQuantity: ObservableObject, Identifiable {
+class EditableEntry: ObservableObject, Identifiable {
     let id = UUID()
-    private var entry: Quantity?
+    private var entry: Entry?
 
     let isEdit: Bool
     let label: String
@@ -37,24 +37,24 @@ class EditableQuantity: ObservableObject, Identifiable {
     @Published
     var quantity: String
     @Published
-    var whichProduct: Product?
+    var product: Product?
     @Published
-    var whichStore: Store?
+    var stores: Store?
 
     func update() {
         if entry != nil {
-            entry!.category = whichProduct?.category
+            entry!.category = product?.category
             entry!.completed = false
             entry!.quantity = quantity
-            entry!.whichProduct = whichProduct
-            entry!.whichStore = nil
-            if whichStore != nil { entry!.addToWhichStore(whichStore!) }
+            entry!.product = product
+            entry!.stores = nil
+            if stores != nil { entry!.addToStores(stores!) }
             entry!.objectWillChange.send()
         }
     }
 
     func add(context: NSManagedObjectContext) {
-        self.entry = Quantity(context: context)
+        self.entry = Entry(context: context)
         self.entry!.id = UUID()
         update()
     }
@@ -65,17 +65,17 @@ class EditableQuantity: ObservableObject, Identifiable {
         isEdit = false
         label = "Add"
         quantity = ""
-        whichProduct = nil
-        whichStore = nil
+        product = nil
+        stores = nil
     }
 
-    init(_ entry: Quantity) {
+    init(_ entry: Entry) {
         self.entry = entry
         category = entry.category
         isEdit = true
         label = "Update"
         quantity = entry.quantity ?? ""
-        whichProduct = entry.whichProduct
-        whichStore = entry.anyStore
+        product = entry.product
+        stores = entry.anyStore
     }
 }

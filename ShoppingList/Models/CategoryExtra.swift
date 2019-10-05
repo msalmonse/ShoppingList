@@ -1,5 +1,5 @@
 //
-//  CategoryExtension.swift
+//  CategoryExtra.swift
 //  ShoppingList
 //
 //  Created by Michael Salmon on 2019-10-01.

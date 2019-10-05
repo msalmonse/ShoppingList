@@ -1,5 +1,5 @@
 //
-//  QuantityEdit.swift
+//  EntryEdit.swift
 //  ShoppingList
 //
 //  Created by Michael Salmon on 2019-10-04.
@@ -9,12 +9,12 @@
 import SwiftUI
 import CoreData
 
-struct QuantityEdit: View {
+struct EntryEdit: View {
     @Environment(\.presentationMode)
     var mode: Binding<PresentationMode>
 
     @ObservedObject
-    var quantity: EditableQuantity
+    var entry: EditableEntry
     var managedObjectContext: NSManagedObjectContext
     var products: FetchedResults<Product>
     var stores: FetchedResults<Store>
@@ -25,38 +25,38 @@ struct QuantityEdit: View {
     var storeIndex: Int
 
     init(
-        _ quantity: EditableQuantity,
+        _ entry: EditableEntry,
         context: NSManagedObjectContext,
         products: FetchedResults<Product>,
         stores: FetchedResults<Store>,
         storeIndex: Binding<Int>
     ) {
-        self.quantity = quantity
+        self.entry = entry
         self.managedObjectContext = context
         self.products = products
         self.stores = stores
         self._storeIndex = storeIndex
     }
 
-    func updateQuantity() {
-        quantity.whichProduct =
+    func updateEntry() {
+        entry.product =
             products.indices.contains(productIndex) ? products[productIndex] : nil
-        quantity.whichStore =
+        entry.stores =
             stores.indices.contains(storeIndex) ? stores[storeIndex] : nil
-        if quantity.isEdit {
-            quantity.update()
+        if entry.isEdit {
+            entry.update()
         } else {
-            quantity.add(context: managedObjectContext)
+            entry.add(context: managedObjectContext)
         }
         managedObjectContext.persist()
-        if quantity.isEdit { mode.wrappedValue.dismiss() }
+        if entry.isEdit { mode.wrappedValue.dismiss() }
     }
 
     var body: some View {
         VStack {
             StoreSelector(index: $storeIndex, stores: stores)
             ProductSelector(index: $productIndex, products: products)
-            TextField("Quantity", text: $quantity.quantity)
+            TextField("Quantity", text: $entry.quantity)
             HStack {
                 Button(
                     action: {
@@ -65,10 +65,10 @@ struct QuantityEdit: View {
                     label: { Text("Cancel") }
                 )
                 Button(
-                    action: { self.updateQuantity() },
-                    label: { Text(self.quantity.label) }
+                    action: { self.updateEntry() },
+                    label: { Text(self.entry.label) }
                 )
-                .disabled(self.quantity.quantity.isEmpty)
+                .disabled(self.entry.quantity.isEmpty)
             }
             Spacer()
             Button(

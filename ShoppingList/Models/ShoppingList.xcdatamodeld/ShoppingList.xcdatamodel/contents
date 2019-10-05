@@ -3,36 +3,36 @@
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="category" inverseEntity="Entry"/>
         <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Product" inverseName="category" inverseEntity="Product"/>
-        <relationship name="quantities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quantity" inverseName="category" inverseEntity="Quantity"/>
         <relationship name="stores" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Store" inverseName="categories" inverseEntity="Store"/>
+    </entity>
+    <entity name="Entry" representedClassName="Entry" syncable="YES" codeGenerationType="class">
+        <attribute name="completed" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="quantity" optional="YES" attributeType="String"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="entries" inverseEntity="Category"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="entries" inverseEntity="Product"/>
+        <relationship name="stores" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Store" inverseName="entries" inverseEntity="Store"/>
     </entity>
     <entity name="Product" representedClassName="Product" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="manufacturer" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="products" inverseEntity="Category"/>
-        <relationship name="howMuch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quantity" inverseName="whichProduct" inverseEntity="Quantity"/>
-    </entity>
-    <entity name="Quantity" representedClassName="Quantity" syncable="YES" codeGenerationType="class">
-        <attribute name="completed" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="quantity" optional="YES" attributeType="String"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="quantities" inverseEntity="Category"/>
-        <relationship name="whichProduct" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="howMuch" inverseEntity="Product"/>
-        <relationship name="whichStore" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Store" inverseName="howMuch" inverseEntity="Store"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="product" inverseEntity="Entry"/>
     </entity>
     <entity name="Store" representedClassName="Store" syncable="YES" codeGenerationType="class">
         <attribute name="branch" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="stores" inverseEntity="Category"/>
-        <relationship name="howMuch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quantity" inverseName="whichStore" inverseEntity="Quantity"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="stores" inverseEntity="Entry"/>
     </entity>
     <elements>
         <element name="Category" positionX="-1058.0859375" positionY="-152.62890625" width="128" height="118"/>
         <element name="Product" positionX="-1346.109375" positionY="198.984375" width="128" height="118"/>
-        <element name="Quantity" positionX="-1061.6796875" positionY="129.2421875" width="128" height="133"/>
+        <element name="Entry" positionX="-1061.6796875" positionY="129.2421875" width="128" height="133"/>
         <element name="Store" positionX="-1392.0625" positionY="-137.8359375" width="128" height="118"/>
     </elements>
 </model>

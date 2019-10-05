@@ -21,10 +21,10 @@ struct HomeView: View {
     var products: FetchedResults<Product>
 
     @FetchRequest(
-        entity: Quantity.entity(),
+        entity: Entry.entity(),
         sortDescriptors: []
     )
-    var entries: FetchedResults<Quantity>
+    var entries: FetchedResults<Entry>
 
     @FetchRequest(
         entity: Store.entity(),
@@ -73,8 +73,8 @@ struct HomeView: View {
                 Spacer()
                 Text("").hidden()
                 .sheet(isPresented: $trigger) {
-                    QuantityEdit(
-                        EditableQuantity(),
+                    EntryEdit(
+                        EditableEntry(),
                         context: self.managedObjectContext,
                         products: self.products,
                         stores: self.stores,
@@ -90,7 +90,7 @@ struct EntryRow: View {
     @Environment(\.managedObjectContext)
     var managedObjectContext
     @ObservedObject
-    var entry: Quantity
+    var entry: Entry
     var product: Product?
     var products: FetchedResults<Product>
     var store: Store?
@@ -102,12 +102,12 @@ struct EntryRow: View {
     var trigger = false
 
     init(
-        entry: Quantity,
+        entry: Entry,
         products: FetchedResults<Product>,
         stores: FetchedResults<Store>
     ) {
         self.entry = entry
-        self.product = entry.whichProduct
+        self.product = entry.product
         self.products = products
         self.store = entry.anyStore
         self.stores = stores
@@ -142,8 +142,8 @@ struct EntryRow: View {
             )
             Text("").hidden()
             .sheet(isPresented: $trigger) {
-                QuantityEdit(
-                    EditableQuantity(self.entry),
+                EntryEdit(
+                    EditableEntry(self.entry),
                     context: self.managedObjectContext,
                     products: self.products,
                     stores: self.stores,
