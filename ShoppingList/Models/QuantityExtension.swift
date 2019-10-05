@@ -44,6 +44,7 @@ class EditableQuantity: ObservableObject, Identifiable {
     func update() {
         if entry != nil {
             entry!.category = whichProduct?.category
+            entry!.completed = false
             entry!.quantity = quantity
             entry!.whichProduct = whichProduct
             entry!.whichStore = nil

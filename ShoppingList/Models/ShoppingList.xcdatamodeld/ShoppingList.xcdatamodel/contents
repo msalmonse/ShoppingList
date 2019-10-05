@@ -15,7 +15,7 @@
         <relationship name="howMuch" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quantity" inverseName="whichProduct" inverseEntity="Quantity"/>
     </entity>
     <entity name="Quantity" representedClassName="Quantity" syncable="YES" codeGenerationType="class">
-        <attribute name="completed" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="completed" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="quantity" optional="YES" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="quantities" inverseEntity="Category"/>

@@ -37,21 +37,34 @@ struct HomeView: View {
     @State
     var storeIndex = -1
 
+    @State
+    var trigger = false
+
+    func removeCompleted() {
+        _ = entries.filter({ $0.completed }).map { self.managedObjectContext.delete($0) }
+    }
+
     func selectedStore() -> Store? {
         if !stores.indices.contains(storeIndex) { return nil }
         return stores[storeIndex]
     }
 
-    @State
-    var trigger = false
-
     var body: some View {
         VStack(alignment: .leading) {
             SelectedStoreView(index: $storeIndex, stores: stores)
             List(entries.filter({ $0.storeFilter(selectedStore()) }), id: \.self) {
-                EntryRow(entry: $0)
+                EntryRow(
+                    entry: $0,
+                    products: self.products,
+                    stores: self.stores
+                )
             }
             HStack {
+                Spacer()
+                Button(
+                    action: { self.removeCompleted() },
+                    label: { Text("Remove Completed") }
+                )
                 Spacer()
                 Button(
                     action: { self.trigger = true },
@@ -79,12 +92,25 @@ struct EntryRow: View {
     @ObservedObject
     var entry: Quantity
     var product: Product?
+    var products: FetchedResults<Product>
     var store: Store?
+    var stores: FetchedResults<Store>
 
-    init(entry: Quantity) {
+    @State
+    var storeIndex = -1
+    @State
+    var trigger = false
+
+    init(
+        entry: Quantity,
+        products: FetchedResults<Product>,
+        stores: FetchedResults<Store>
+    ) {
         self.entry = entry
         self.product = entry.whichProduct
+        self.products = products
         self.store = entry.anyStore
+        self.stores = stores
     }
 
     var body: some View {
@@ -105,6 +131,25 @@ struct EntryRow: View {
             Text(entry.quantity ?? "")
             Text(product?.title ?? "")
             Text("@" + (store?.title ?? "Any"))
+            Spacer()
+            Button(
+                action: {
+                    self.storeIndex =
+                        self.store == nil ? -1 : (self.stores.firstIndex(of: self.store!) ?? -1)
+                    self.trigger = true
+                },
+                label: { Image(systemName: "square.and.pencil") }
+            )
+            Text("").hidden()
+            .sheet(isPresented: $trigger) {
+                QuantityEdit(
+                    EditableQuantity(self.entry),
+                    context: self.managedObjectContext,
+                    products: self.products,
+                    stores: self.stores,
+                    storeIndex: self.$storeIndex
+                )
+            }
         }
     }
 }
