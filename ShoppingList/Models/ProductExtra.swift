@@ -39,7 +39,13 @@ class EditableProduct: ObservableObject, Identifiable {
 
     func update() {
         if product != nil {
-            product!.category = category
+            if product!.category != category {
+                // Remove from old category
+                product!.category?.removeFromProducts(product!)
+                product!.category = category
+                // Add to new category
+                category?.addToProducts(product!)
+            }
             product!.manufacturer = manufacturer.isEmpty ? nil : manufacturer
             product!.name = name
             product!.objectWillChange.send()
