@@ -36,7 +36,9 @@ struct CategoriesSelector: View {
                     CategoriesListRow(category: self.categoriesList[index]).tag(index)
                 }
             }
-            CategoryToggle(category: categoriesList[index])
+            if categoriesList.indices.contains(index) {
+                CategoryToggle(category: categoriesList[index])
+            }
         }
     }
 }
