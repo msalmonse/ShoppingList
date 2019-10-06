@@ -9,8 +9,33 @@
 import SwiftUI
 
 struct Settings: View {
+    @ObservedObject
+    var settings = UserSettings()
+    let nameVersion: String
+
+    init() {
+        let name = bundledData(key: "CFBundleName")
+        let version = bundledData(key: "CFBundleShortVersionString")
+        let build = bundledData(key: "CFBundleVersion")
+
+        var string = ""
+        if name != nil {
+            string = name!
+            if version != nil {
+                string += " - \(version!)"
+                if build != nil {
+                    string += "(\(build!))"
+                }
+            }
+        }
+        self.nameVersion = string
+    }
+
     var body: some View {
-        Text("Settings")
+        VStack {
+            Spacer()
+            Text(nameVersion)
+        }
     }
 }
 
