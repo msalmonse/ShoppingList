@@ -83,13 +83,18 @@ struct StoreRow: View {
                 label: {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(store.name ?? "").font(.headline)
-                            Text(store.branch ?? "").font(.subheadline)
+                            Text(store.name ?? "")
+                            .font(.headline)
+                            .layoutPriority(2.0)
+                            Text(store.branch ?? "")
+                            .font(.subheadline)
                         }
                         Spacer()
                         VStack(alignment: .trailing) {
                             ForEach(store.allCategoryNames, id: \.self) {
                                 Text($0 as String)
+                                .font(.caption)
+                                .layoutPriority(1.0)
                             }
                         }
                         Image(systemName: "chevron.right")

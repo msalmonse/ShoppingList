@@ -86,12 +86,17 @@ struct ProductRow: View {
                 label: {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(product.name ?? "").font(.headline)
-                            Text(product.manufacturer ?? "").font(.subheadline)
+                            Text(product.name ?? "")
+                            .font(.headline)
+                            .layoutPriority(2.0)
+                            Text(product.manufacturer ?? "")
+                                .font(.subheadline)
                         }
                         Spacer()
                         VStack(alignment: .trailing) {
                             Text(product.category?.name ?? "")
+                            .font(.caption)
+                                .layoutPriority(1.0)
                         }
                         Image(systemName: "chevron.right")
                     }
