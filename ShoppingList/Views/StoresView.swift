@@ -94,7 +94,7 @@ struct StoreRow: View {
                                 Text($0 as String)
                             }
                         }
-                        Image(systemName: "chevron.down")
+                        Image(systemName: "chevron.right")
                     }
                 }
             )

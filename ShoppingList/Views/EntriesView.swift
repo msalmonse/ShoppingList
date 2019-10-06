@@ -138,7 +138,7 @@ struct EntryRow: View {
                         self.store == nil ? -1 : (self.stores.firstIndex(of: self.store!) ?? -1)
                     self.trigger = true
                 },
-                label: { Image(systemName: "square.and.pencil") }
+                label: { Image(systemName: "chevron.right") }
             )
             Text("").hidden()
             .sheet(isPresented: $trigger) {
@@ -174,7 +174,7 @@ struct SelectedStoreView: View {
                 label: { Text("Store: \(storeTitle())") }
             )
             Spacer()
-            Text(">")
+            Image(systemName: "chevron.right")
 
             Text("").hidden()
             .sheet(isPresented: $trigger) {

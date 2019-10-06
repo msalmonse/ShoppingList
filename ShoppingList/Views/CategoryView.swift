@@ -72,7 +72,7 @@ struct CategoryRow: View {
                             Text(self.category.name ?? "").font(.headline)
                         }
                         Spacer()
-                        Image(systemName: "chevron.down")
+                        Image(systemName: "chevron.right")
                     }
                 }
             )

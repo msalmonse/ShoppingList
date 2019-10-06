@@ -93,7 +93,7 @@ struct ProductRow: View {
                         VStack(alignment: .trailing) {
                             Text(product.category?.name ?? "")
                         }
-                        Image(systemName: "chevron.down")
+                        Image(systemName: "chevron.right")
                     }
                 }
             )
