@@ -34,7 +34,7 @@ struct StoresView: View {
     var body: some View {
         VStack {
             List(stores, id: \.self) { store in
-                StoreRow(store: store)
+                StoreRow(store: store, categories: self.categories)
             }
             Button(
                 action: {
@@ -60,32 +60,66 @@ struct StoreRow: View {
 
     let store: Store
     let allCategoryNames: [String]
+    let categories: FetchedResults<Category>
 
-    init(store: Store) {
+    init(store: Store, categories: FetchedResults<Category>) {
         self.store = store
         self.allCategoryNames = store.allCategoryNames
+        self.categories = categories
+    }
+
+    @State
+    var doEdit = false
+    @State
+    var trigger = false
+
+    func deleteStore() {
+        self.managedObjectContext.delete(self.store)
+        self.managedObjectContext.persist()
     }
 
     var body: some View {
         HStack {
-            VStack {
-                Text(store.name ?? "").font(.headline)
-                Text(store.branch ?? "").font(.subheadline)
-            }
-            Spacer()
-            VStack {
-                ForEach(store.allCategoryNames, id: \.self) {
-                    Text($0 as String)
-                }
-            }
-            Spacer()
             Button(
-                action: {
-                    self.managedObjectContext.delete(self.store)
-                    self.managedObjectContext.persist()
-                },
-                label: { Image(systemName: "clear").foregroundColor(.red) }
+                action: { self.trigger = true },
+                label: {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(store.name ?? "").font(.headline)
+                            Text(store.branch ?? "").font(.subheadline)
+                        }
+                        Spacer()
+                        VStack(alignment: .trailing) {
+                            ForEach(store.allCategoryNames, id: \.self) {
+                                Text($0 as String)
+                            }
+                        }
+                        Image(systemName: "chevron.down")
+                    }
+                }
             )
+
+            Text("").hidden()
+            .actionSheet(isPresented: $trigger) {
+                ActionSheet(
+                    title: Text("Store:"),
+                    message: Text(self.store.title),
+                    buttons: [
+                        .default(Text("Edit"), action: { self.doEdit = true }),
+                        .destructive(Text("Delete"), action: { self.deleteStore() }),
+                        .cancel()
+                    ]
+                )
+            }
+
+            Text("").hidden()
+            .sheet(isPresented: $doEdit) {
+                StoreEdit(
+                    EditableStore(self.store),
+                    context: self.managedObjectContext,
+                    categories: self.categories
+                )
+            }
         }
     }
 }

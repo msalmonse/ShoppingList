@@ -34,7 +34,7 @@ struct ProductsView: View {
     var body: some View {
         VStack {
             List(products, id: \.self) { product in
-                ProductRow(product: product)
+                ProductRow(product: product, categories: self.categories)
             }
             Button(
                 action: {
@@ -59,23 +59,66 @@ struct ProductRow: View {
     var managedObjectContext
 
     let product: Product
+    let categories: FetchedResults<Category>
+
+    @State
+    var doEdit = false
+    @State
+    var categoryIndex = -1
+    @State
+    var trigger = false
+
+    func deleteProduct() {
+        self.managedObjectContext.delete(self.product)
+        self.managedObjectContext.persist()
+    }
+
+    func editProduct() {
+        categoryIndex = product.category == nil
+            ? -1 : (categories.firstIndex(of: product.category!) ?? -1)
+        doEdit = true
+    }
 
     var body: some View {
         HStack {
-            VStack {
-                Text(product.name ?? "").font(.headline)
-                Text(product.manufacturer ?? "").font(.subheadline)
-            }
-            Spacer()
-            Text(product.category?.name ?? "")
-            Spacer()
             Button(
-                action: {
-                    self.managedObjectContext.delete(self.product)
-                    self.managedObjectContext.persist()
-                },
-                label: { Image(systemName: "clear").foregroundColor(.red) }
+                action: { self.trigger = true },
+                label: {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(product.name ?? "").font(.headline)
+                            Text(product.manufacturer ?? "").font(.subheadline)
+                        }
+                        Spacer()
+                        VStack(alignment: .trailing) {
+                            Text(product.category?.name ?? "")
+                        }
+                        Image(systemName: "chevron.down")
+                    }
+                }
             )
+
+            Text("").hidden()
+            .actionSheet(isPresented: $trigger) {
+                ActionSheet(
+                    title: Text("Product:"),
+                    message: Text(self.product.title),
+                    buttons: [
+                        .default(Text("Edit"), action: { self.editProduct() }),
+                        .destructive(Text("Delete"), action: { self.deleteProduct() }),
+                        .cancel()
+                    ]
+                )
+            }
+
+            Text("").hidden()
+            .sheet(isPresented: $doEdit) {
+                ProductEdit(
+                    EditableProduct(self.product, categoryIndex: self.categoryIndex),
+                    context: self.managedObjectContext,
+                    categories: self.categories
+                )
+            }
         }
     }
 }

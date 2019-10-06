@@ -37,7 +37,10 @@ struct CategoriesView: View {
             )
             Text("").hidden()
             .sheet(isPresented: $trigger) {
-                CategoryEdit(EditableCategory(), context: self.managedObjectContext)
+                CategoryEdit(
+                    EditableCategory(),
+                    context: self.managedObjectContext
+                )
             }
         }
     }
@@ -49,19 +52,51 @@ struct CategoryRow: View {
 
     let category: Category
 
+    @State
+    var doEdit = false
+    @State
+    var trigger = false
+
+    func deleteCategory() {
+        self.managedObjectContext.delete(self.category)
+        self.managedObjectContext.persist()
+    }
+
     var body: some View {
         HStack {
-            VStack {
-                Text(category.name ?? "").font(.headline)
-            }
-            Spacer()
             Button(
-                action: {
-                    self.managedObjectContext.delete(self.category)
-                    self.managedObjectContext.persist()
-                },
-                label: { Image(systemName: "clear").foregroundColor(.red) }
+                action: { self.trigger = true },
+                label: {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(self.category.name ?? "").font(.headline)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.down")
+                    }
+                }
             )
+
+            Text("").hidden()
+            .actionSheet(isPresented: $trigger) {
+                ActionSheet(
+                    title: Text("Category:"),
+                    message: Text(self.category.name ?? ""),
+                    buttons: [
+                        .default(Text("Edit"), action: { self.doEdit = true }),
+                        .destructive(Text("Delete"), action: { self.deleteCategory() }),
+                        .cancel()
+                    ]
+                )
+            }
+
+            Text("").hidden()
+            .sheet(isPresented: $doEdit) {
+                CategoryEdit(
+                    EditableCategory(self.category),
+                    context: self.managedObjectContext
+                )
+            }
         }
     }
 }
