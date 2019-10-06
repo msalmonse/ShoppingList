@@ -39,11 +39,19 @@ struct CategoryEdit: View {
                 text: $category.name,
                 onCommit: { self.updateCategory() }
             )
-            Button(
-                action: { self.updateCategory() },
-                label: { Text(self.category.label) }
-            )
-            .disabled(category.name.isEmpty)
+            HStack {
+                Button(
+                    action: {
+                        self.mode.wrappedValue.dismiss()
+                    },
+                    label: { Text("Cancel") }
+                )
+                Button(
+                    action: { self.updateCategory() },
+                    label: { Text(self.category.label) }
+                )
+                .disabled(category.name.isEmpty)
+            }
         }
         .padding(.horizontal, 20)
     }
