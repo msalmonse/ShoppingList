@@ -33,7 +33,7 @@ struct CategoriesView: View {
                 action: {
                     self.trigger = true
                 },
-                label: { Text("New Category") }
+                label: { EncapsulatedText("New Category") }
             )
             Text("").hidden()
             .sheet(isPresented: $trigger) {
@@ -69,7 +69,7 @@ struct CategoryRow: View {
                 label: {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(self.category.name ?? "").font(.headline)
+                            ButtonText(self.category.name ?? "").font(.headline)
                         }
                         Spacer()
                         Image(systemName: "chevron.right")

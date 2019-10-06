@@ -33,6 +33,7 @@
 		C48492A12347C2D100AF8292 /* EntryEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48492A02347C2D100AF8292 /* EntryEdit.swift */; };
 		C48492A32348678400AF8292 /* ProductSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48492A22348678400AF8292 /* ProductSelector.swift */; };
 		C48492A72348BE4A00AF8292 /* EntriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48492A62348BE4A00AF8292 /* EntriesView.swift */; };
+		C48492A92349FCBA00AF8292 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48492A82349FCBA00AF8292 /* Texts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		C48492A02347C2D100AF8292 /* EntryEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryEdit.swift; sourceTree = "<group>"; };
 		C48492A22348678400AF8292 /* ProductSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSelector.swift; sourceTree = "<group>"; };
 		C48492A62348BE4A00AF8292 /* EntriesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntriesView.swift; sourceTree = "<group>"; };
+		C48492A82349FCBA00AF8292 /* Texts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				C410F12523427CE000AF632D /* StoreEdit.swift */,
 				C410F0EF233FE10300AF632D /* StoreSelector.swift */,
 				C410F0DF233DE7A100AF632D /* StoresView.swift */,
+				C48492A82349FCBA00AF8292 /* Texts.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				C410F12623427CE100AF632D /* StoreEdit.swift in Sources */,
 				C410F0F72340ADDB00AF632D /* CategorySelector.swift in Sources */,
 				C410F0F52340A4B900AF632D /* CategoryView.swift in Sources */,
+				C48492A92349FCBA00AF8292 /* Texts.swift in Sources */,
 				C410F0E0233DE7A100AF632D /* StoresView.swift in Sources */,
 				C410F0DE233DE30F00AF632D /* PersistContext.swift in Sources */,
 				C410F12A2343296D00AF632D /* CategoryExtra.swift in Sources */,

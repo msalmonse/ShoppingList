@@ -54,7 +54,7 @@ struct CategoryToggle: View {
             action: {
                 self.category.included.toggle()
             },
-            label: { Text("\(category.included ? "Remove" : "Add") Category") }
+            label: { EncapsulatedText("\(category.included ? "Remove" : "Add") Category") }
         )
     }
 }

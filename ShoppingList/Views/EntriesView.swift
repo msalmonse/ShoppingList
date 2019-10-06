@@ -63,12 +63,12 @@ struct EntriesView: View {
                 Spacer()
                 Button(
                     action: { self.removeCompleted() },
-                    label: { Text("Remove Completed") }
+                    label: { EncapsulatedText("Remove Completed") }
                 )
                 Spacer()
                 Button(
                     action: { self.trigger = true },
-                    label: { Text("New Entry") }
+                    label: { EncapsulatedText("New Entry") }
                 )
                 Spacer()
                 Text("").hidden()
@@ -171,7 +171,7 @@ struct SelectedStoreView: View {
         HStack {
             Button(
                 action: { self.trigger = true },
-                label: { Text("Store: \(storeTitle())") }
+                label: { ButtonText("Store: \(storeTitle())") }
             )
             Spacer()
             Image(systemName: "chevron.right")

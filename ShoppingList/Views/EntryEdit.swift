@@ -62,18 +62,18 @@ struct EntryEdit: View {
                     action: {
                         self.mode.wrappedValue.dismiss()
                     },
-                    label: { Text("Cancel") }
+                    label: { EncapsulatedText("Cancel") }
                 )
                 Button(
                     action: { self.updateEntry() },
-                    label: { Text(self.entry.label) }
+                    label: { EncapsulatedText(self.entry.label) }
                 )
                 .disabled(self.entry.quantity.isEmpty)
             }
             Spacer()
             Button(
                 action: { self.mode.wrappedValue.dismiss() },
-                label: { Text("Done") }
+                label: { EncapsulatedText("Done") }
             )
         }
     }

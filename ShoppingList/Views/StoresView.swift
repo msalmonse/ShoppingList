@@ -37,10 +37,8 @@ struct StoresView: View {
                 StoreRow(store: store, categories: self.categories)
             }
             Button(
-                action: {
-                    self.trigger = true
-                },
-                label: { Text("New Store") }
+                action: { self.trigger = true },
+                label: { EncapsulatedText("New Store") }
             )
             Text("").hidden()
             .sheet(isPresented: $trigger) {

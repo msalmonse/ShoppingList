@@ -40,7 +40,7 @@ struct ProductsView: View {
                 action: {
                     self.trigger = true
                 },
-                label: { Text("New Product") }
+                label: { EncapsulatedText("New Product") }
             )
             Text("").hidden()
             .sheet(isPresented: $trigger) {

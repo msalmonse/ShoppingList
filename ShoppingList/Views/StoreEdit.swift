@@ -60,14 +60,12 @@ struct StoreEdit: View {
 
             HStack {
                 Button(
-                    action: {
-                        self.mode.wrappedValue.dismiss()
-                    },
-                    label: { Text("Cancel") }
+                    action: { self.mode.wrappedValue.dismiss() },
+                    label: { EncapsulatedText("Cancel") }
                 )
                 Button(
                     action: { self.updateStore() },
-                    label: { Text(self.store.label) }
+                    label: { EncapsulatedText(self.store.label) }
                 )
                 .disabled(self.store.name.isEmpty)
             }

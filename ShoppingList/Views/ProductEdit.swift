@@ -58,11 +58,11 @@ struct ProductEdit: View {
                     action: {
                         self.mode.wrappedValue.dismiss()
                     },
-                    label: { Text("Cancel") }
+                    label: { EncapsulatedText("Cancel") }
                 )
                 Button(
                     action: { self.updateProduct() },
-                    label: { Text(self.product.label) }
+                    label: { EncapsulatedText(self.product.label, self.product.name.isEmpty) }
                 )
                 .disabled(self.product.name.isEmpty)
             }
