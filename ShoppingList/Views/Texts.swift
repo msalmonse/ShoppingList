@@ -41,6 +41,7 @@ struct EncapsulatedText: View {
         .foregroundColor(disabled ? .secondary : .primary)
         .background(scheme == .dark ? darkGradient : lightGradient)
         .clipShape(Capsule())
+        .overlay(Capsule().strokeBorder(lineWidth: 1.0).foregroundColor(.secondary))
         .padding(5)
     }
 }
