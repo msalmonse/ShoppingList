@@ -35,6 +35,8 @@ struct EntriesView: View {
     var stores: FetchedResults<Store>
 
     @State
+    var productIndex = -1
+    @State
     var storeIndex = -1
 
     @State
@@ -78,6 +80,7 @@ struct EntriesView: View {
                         context: self.managedObjectContext,
                         products: self.products,
                         stores: self.stores,
+                        productIndex: self.$productIndex,
                         storeIndex: self.$storeIndex
                     )
                 }
@@ -96,6 +99,8 @@ struct EntryRow: View {
     var store: Store?
     var stores: FetchedResults<Store>
 
+    @State
+    var productIndex = -1
     @State
     var storeIndex = -1
     @State
@@ -134,6 +139,8 @@ struct EntryRow: View {
             Spacer()
             Button(
                 action: {
+                    self.productIndex =
+                        self.product == nil ? -1 : (self.products.firstIndex(of: self.product!) ?? -1)
                     self.storeIndex =
                         self.store == nil ? -1 : (self.stores.firstIndex(of: self.store!) ?? -1)
                     self.trigger = true
@@ -147,6 +154,7 @@ struct EntryRow: View {
                     context: self.managedObjectContext,
                     products: self.products,
                     stores: self.stores,
+                    productIndex: self.$productIndex,
                     storeIndex: self.$storeIndex
                 )
             }

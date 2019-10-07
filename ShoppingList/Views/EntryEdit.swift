@@ -19,8 +19,8 @@ struct EntryEdit: View {
     var products: FetchedResults<Product>
     var stores: FetchedResults<Store>
 
-    @State
-    var productIndex = 0
+    @Binding
+    var productIndex: Int
     @Binding
     var storeIndex: Int
 
@@ -29,12 +29,14 @@ struct EntryEdit: View {
         context: NSManagedObjectContext,
         products: FetchedResults<Product>,
         stores: FetchedResults<Store>,
+        productIndex: Binding<Int>,
         storeIndex: Binding<Int>
     ) {
         self.entry = entry
         self.managedObjectContext = context
         self.products = products
         self.stores = stores
+        self._productIndex = productIndex
         self._storeIndex = storeIndex
     }
 
@@ -68,7 +70,7 @@ struct EntryEdit: View {
                     action: { self.updateEntry() },
                     label: { EncapsulatedText(self.entry.label) }
                 )
-                .disabled(self.entry.quantity.isEmpty)
+                .disabled(self.entry.quantity.isEmpty && self.productIndex > 0)
             }
             Spacer()
             Button(

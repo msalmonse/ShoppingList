@@ -16,6 +16,7 @@ struct ProductSelector: View {
     var body: some View {
         VStack {
             Picker(selection: $index, label: Text("")) {
+                Text("None").tag(-1)
                 ForEach(products.indices, id: \.self) { index in
                     Text(self.products[index].name ?? "").tag(index)
                 }
