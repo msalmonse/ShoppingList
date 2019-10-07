@@ -87,8 +87,9 @@ struct InputText: View {
             .lineLimit(1)
             .truncationMode(.middle)
             .frame(width: 120, alignment: .trailing)
+
             TextField("", text: $text, onCommit: { self.doOnCommit() })
-            .padding(2)
+            .padding(.horizontal, 5)
             .overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(lineWidth: 1))
             .padding(.horizontal, 10)
         }
