@@ -14,13 +14,16 @@ struct CategorySelector: View {
     let categories: FetchedResults<Category>
 
     var body: some View {
-        Picker(selection: $index, label: Text("")) {
-            Text("None").tag(-1)
-            ForEach(categories.indices, id: \.self) { index in
-                Text(self.categories[index].name ?? "").tag(index)
+        VStack {
+            Picker(selection: $index, label: Text("")) {
+                Text("None").tag(-1)
+                ForEach(categories.indices, id: \.self) { index in
+                    Text(self.categories[index].name ?? "").tag(index)
+                }
             }
             Text("Category").bold()
         }
+        .modifier(PickerBorder())
     }
 }
 
@@ -42,6 +45,7 @@ struct CategoriesSelector: View {
                 CategoryToggle(category: categoriesList[index])
             }
         }
+        .modifier(PickerBorder())
     }
 }
 

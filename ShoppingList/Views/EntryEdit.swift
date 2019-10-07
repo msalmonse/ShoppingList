@@ -58,9 +58,11 @@ struct EntryEdit: View {
 
     var body: some View {
         VStack {
+            Spacer()
             StoreSelector(index: $storeIndex, stores: stores)
             ProductSelector(index: $productIndex, products: products)
-            InputText("Quantity", text: $entry.quantity)
+            InputText("Description", text: $entry.quantity)
+            Spacer()
             HStack {
                 Button(
                     action: {

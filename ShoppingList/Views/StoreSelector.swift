@@ -23,6 +23,7 @@ struct StoreSelector: View {
             }
             Text("Store").bold()
         }
+        .modifier(PickerBorder())
     }
 }
 

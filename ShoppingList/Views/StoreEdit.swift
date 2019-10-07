@@ -49,6 +49,7 @@ struct StoreEdit: View {
 
     var body: some View {
         VStack {
+            Spacer()
             InputText(
                 " Name",
                 text: $store.name,
@@ -60,7 +61,7 @@ struct StoreEdit: View {
                 onCommit: { self.updateStore() }
             )
             CategoriesSelector(categoriesList: categoryList)
-
+            Spacer()
             HStack {
                 Button(
                     action: { self.mode.wrappedValue.dismiss() },

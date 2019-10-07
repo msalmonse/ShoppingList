@@ -93,3 +93,13 @@ struct InputText: View {
         }
     }
 }
+
+// border for pickers
+
+struct PickerBorder: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(lineWidth: 1))
+            .padding(.horizontal, 5)
+    }
+}

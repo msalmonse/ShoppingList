@@ -45,6 +45,7 @@ struct ProductEdit: View {
 
     var body: some View {
         VStack {
+            Spacer()
             InputText(
                 "Name",
                 text: $product.name,
@@ -56,6 +57,7 @@ struct ProductEdit: View {
                 onCommit: { self.updateProduct() }
             )
             CategorySelector(index: $product.categoryIndex, categories: categories)
+            Spacer()
             HStack {
                 Button(
                     action: {

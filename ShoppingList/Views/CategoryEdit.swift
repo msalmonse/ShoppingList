@@ -37,11 +37,13 @@ struct CategoryEdit: View {
 
     var body: some View {
         VStack {
+            Spacer()
             InputText(
                 "Name",
                 text: $category.name,
                 onCommit: { self.updateCategory() }
             )
+            Spacer()
             HStack {
                 Button(
                     action: {
