@@ -100,6 +100,8 @@ struct EntryRow: View {
     var stores: FetchedResults<Store>
 
     @State
+    var doEdit = false
+    @State
     var productIndex = -1
     @State
     var storeIndex = -1
@@ -118,37 +120,66 @@ struct EntryRow: View {
         self.stores = stores
     }
 
+    func completeText() -> Text {
+        let text = entry.completed ? "Uncomplete" : "Complete"
+        return Text(text)
+    }
+
+    func deleteEntry() {
+        managedObjectContext.delete(entry)
+        managedObjectContext.persist()
+    }
+
+    func editSetup() {
+        productIndex =
+            product == nil ? -1 : (products.firstIndex(of: product!) ?? -1)
+        storeIndex =
+            store == nil ? -1 : (stores.firstIndex(of: store!) ?? -1)
+        doEdit = true
+
+    }
+
+    func toggleCompleted() {
+        entry.completed.toggle()
+        entry.objectWillChange.send()
+        managedObjectContext.persist()
+    }
+
     var body: some View {
         HStack {
             Button(
-                action: {
-                    self.entry.completed.toggle()
-                    self.entry.objectWillChange.send()
-                    self.managedObjectContext.persist()
-                },
+                action: { self.trigger = true },
                 label: {
-                    Image(systemName: self.entry.completed ? "star.fill" : "star" )
-                    .foregroundColor(.yellow)
-                    .frame(width: 20, height: 20)
-                    .clipShape(Rectangle())
+                    HStack {
+                        Image(systemName: self.entry.completed ? "star.fill" : "star" )
+                        .foregroundColor(.yellow)
+                        .frame(width: 20, height: 20)
+                        .clipShape(Rectangle())
+                        Text(entry.quantity ?? "")
+                        Text(product?.title ?? "")
+                        Text("@" + (store?.title ?? "Any"))
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
                 }
             )
-            Text(entry.quantity ?? "")
-            Text(product?.title ?? "")
-            Text("@" + (store?.title ?? "Any"))
-            Spacer()
-            Button(
-                action: {
-                    self.productIndex =
-                        self.product == nil ? -1 : (self.products.firstIndex(of: self.product!) ?? -1)
-                    self.storeIndex =
-                        self.store == nil ? -1 : (self.stores.firstIndex(of: self.store!) ?? -1)
-                    self.trigger = true
-                },
-                label: { Image(systemName: "chevron.right") }
-            )
+
             Text("").hidden()
-            .sheet(isPresented: $trigger) {
+            .actionSheet(isPresented: $trigger) {
+                ActionSheet(
+                    title: Text("Entry:"),
+                    message: Text(product?.title ?? ""),
+                    buttons: [
+                        .default(completeText(), action: { self.toggleCompleted() }),
+                        .default(Text("Edit"), action: { self.editSetup() }),
+                        .destructive(Text("Delete"), action: { self.deleteEntry() }),
+                        .cancel()
+                    ]
+                )
+            }
+
+            Text("").hidden()
+            .sheet(isPresented: $doEdit) {
                 EntryEdit(
                     EditableEntry(self.entry),
                     context: self.managedObjectContext,
