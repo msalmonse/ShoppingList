@@ -61,7 +61,7 @@ struct EntryEdit: View {
             Spacer()
             StoreSelector(index: $storeIndex, stores: stores)
             ProductSelector(index: $productIndex, products: products)
-            InputText("Description", text: $entry.quantity)
+            InputText("Description", text: $entry.quantity, onCommit: { self.updateEntry() })
             Spacer()
             HStack {
                 Button(
