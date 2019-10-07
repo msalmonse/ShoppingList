@@ -58,7 +58,7 @@ struct EntryEdit: View {
         VStack {
             StoreSelector(index: $storeIndex, stores: stores)
             ProductSelector(index: $productIndex, products: products)
-            TextField("Quantity", text: $entry.quantity)
+            InputText("Quantity", text: $entry.quantity)
             HStack {
                 Button(
                     action: {

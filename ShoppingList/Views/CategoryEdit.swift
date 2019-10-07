@@ -34,7 +34,7 @@ struct CategoryEdit: View {
 
     var body: some View {
         VStack {
-            TextField(
+            InputText(
                 "Category name",
                 text: $category.name,
                 onCommit: { self.updateCategory() }

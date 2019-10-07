@@ -42,12 +42,12 @@ struct ProductEdit: View {
 
     var body: some View {
         VStack {
-            TextField(
+            InputText(
                 "Product name",
                 text: $product.name,
                 onCommit: { self.updateProduct() }
             )
-            TextField(
+            InputText(
                 "Product manufacturer",
                 text: $product.manufacturer,
                 onCommit: { self.updateProduct() }

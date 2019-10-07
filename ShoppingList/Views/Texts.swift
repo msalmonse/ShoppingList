@@ -61,3 +61,33 @@ fileprivate let lightGradient = LinearGradient(
     startPoint: .top,
     endPoint: .bottom
 )
+
+// wrapper for TextField
+
+struct InputText: View {
+    let title: String
+    @Binding
+    var text: String
+    let onCommit: (() -> Void)?
+
+    init(_ title: String, text: Binding<String>, onCommit: (() -> Void)? = nil) {
+        self.title = title
+        self._text = text
+        self.onCommit = onCommit
+    }
+
+    func doOnCommit() {
+        if onCommit != nil { onCommit!() }
+    }
+
+    var body: some View {
+        HStack {
+            Text(title)
+            .multilineTextAlignment(.trailing)
+            TextField("", text: $text, onCommit: { self.doOnCommit() })
+            .padding(2)
+            .overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(lineWidth: 1))
+            .padding(.horizontal, 10)
+        }
+    }
+}
