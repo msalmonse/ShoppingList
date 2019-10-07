@@ -19,6 +19,8 @@ struct StoreEdit: View {
     var categories: FetchedResults<Category>
     var categoryList: HasCategoryList = []
 
+    let cancelDone: String
+
     init(
         _ store: EditableStore,
         context: NSManagedObjectContext,
@@ -27,6 +29,7 @@ struct StoreEdit: View {
         self.store = store
         self.categories = categories
         self.managedObjectContext = context
+        self.cancelDone = store.isEdit ? "Cancel" : "Done"
         categoryList = categories.map {
             HasCategory($0, self.store.categories.contains($0))
         }
@@ -47,12 +50,12 @@ struct StoreEdit: View {
     var body: some View {
         VStack {
             InputText(
-                "Store name",
+                " Name",
                 text: $store.name,
                 onCommit: { self.updateStore() }
             )
             InputText(
-                "Store branch",
+                "Branch",
                 text: $store.branch,
                 onCommit: { self.updateStore() }
             )
@@ -61,7 +64,7 @@ struct StoreEdit: View {
             HStack {
                 Button(
                     action: { self.mode.wrappedValue.dismiss() },
-                    label: { EncapsulatedText("Cancel") }
+                    label: { EncapsulatedText(cancelDone) }
                 )
                 Button(
                     action: { self.updateStore() },

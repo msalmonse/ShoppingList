@@ -17,9 +17,12 @@ struct CategoryEdit: View {
     var category: EditableCategory
     var managedObjectContext: NSManagedObjectContext
 
+    let cancelDone: String
+
     init(_ category: EditableCategory, context: NSManagedObjectContext) {
         self.category = category
         self.managedObjectContext = context
+        self.cancelDone = category.isEdit ? "Cancel" : "Done"
     }
 
     func updateCategory() {
@@ -35,7 +38,7 @@ struct CategoryEdit: View {
     var body: some View {
         VStack {
             InputText(
-                "Category name",
+                "Name",
                 text: $category.name,
                 onCommit: { self.updateCategory() }
             )
@@ -44,11 +47,11 @@ struct CategoryEdit: View {
                     action: {
                         self.mode.wrappedValue.dismiss()
                     },
-                    label: { Text("Cancel") }
+                    label: { EncapsulatedText(cancelDone) }
                 )
                 Button(
                     action: { self.updateCategory() },
-                    label: { Text(self.category.label) }
+                    label: { EncapsulatedText(self.category.label) }
                 )
                 .disabled(category.name.isEmpty)
             }

@@ -83,7 +83,9 @@ struct InputText: View {
     var body: some View {
         HStack {
             Text(title)
-            .multilineTextAlignment(.trailing)
+            .lineLimit(1)
+            .truncationMode(.middle)
+            .frame(width: 120, alignment: .trailing)
             TextField("", text: $text, onCommit: { self.doOnCommit() })
             .padding(2)
             .overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(lineWidth: 1))

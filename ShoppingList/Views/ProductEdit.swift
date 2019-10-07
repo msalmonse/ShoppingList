@@ -18,6 +18,8 @@ struct ProductEdit: View {
     var managedObjectContext: NSManagedObjectContext
     var categories: FetchedResults<Category>
 
+    let cancelDone: String
+
     init(
         _ product: EditableProduct,
         context: NSManagedObjectContext,
@@ -26,6 +28,7 @@ struct ProductEdit: View {
         self.product = product
         self.managedObjectContext = context
         self.categories = categories
+        self.cancelDone = product.isEdit ? "Cancel" : "Done"
     }
 
     func updateProduct() {
@@ -43,12 +46,12 @@ struct ProductEdit: View {
     var body: some View {
         VStack {
             InputText(
-                "Product name",
+                "Name",
                 text: $product.name,
                 onCommit: { self.updateProduct() }
             )
             InputText(
-                "Product manufacturer",
+                "Manufacturer",
                 text: $product.manufacturer,
                 onCommit: { self.updateProduct() }
             )
@@ -58,7 +61,7 @@ struct ProductEdit: View {
                     action: {
                         self.mode.wrappedValue.dismiss()
                     },
-                    label: { EncapsulatedText("Cancel") }
+                    label: { EncapsulatedText(cancelDone) }
                 )
                 Button(
                     action: { self.updateProduct() },

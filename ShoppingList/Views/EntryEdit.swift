@@ -23,6 +23,7 @@ struct EntryEdit: View {
     var productIndex: Int
     @Binding
     var storeIndex: Int
+    let cancelDone: String
 
     init(
         _ entry: EditableEntry,
@@ -38,6 +39,7 @@ struct EntryEdit: View {
         self.stores = stores
         self._productIndex = productIndex
         self._storeIndex = storeIndex
+        self.cancelDone = entry.isEdit ? "Cancel" : "Done"
     }
 
     func updateEntry() {
@@ -64,7 +66,7 @@ struct EntryEdit: View {
                     action: {
                         self.mode.wrappedValue.dismiss()
                     },
-                    label: { EncapsulatedText("Cancel") }
+                    label: { EncapsulatedText(cancelDone) }
                 )
                 Button(
                     action: { self.updateEntry() },
@@ -72,11 +74,6 @@ struct EntryEdit: View {
                 )
                 .disabled(self.entry.quantity.isEmpty && self.productIndex > 0)
             }
-            Spacer()
-            Button(
-                action: { self.mode.wrappedValue.dismiss() },
-                label: { EncapsulatedText("Done") }
-            )
         }
     }
 }
