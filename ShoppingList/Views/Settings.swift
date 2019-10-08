@@ -6,6 +6,7 @@
 //  Copyright © 2019 mesme. All rights reserved.
 //
 
+import UserDefaults
 import SwiftUI
 
 struct Settings: View {

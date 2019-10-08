@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import SwiftUI
+import UserDefaults
 
 final class UserSettings: ObservableObject, Identifiable {
     let id = UUID()
