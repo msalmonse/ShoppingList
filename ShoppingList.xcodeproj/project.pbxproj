@@ -123,13 +123,13 @@
 		C410F0AE233D2B3700AF632D /* ShoppingList */ = {
 			isa = PBXGroup;
 			children = (
-				C410F0C0233D2B3B00AF632D /* Info.plist */,
 				C410F0AF233D2B3700AF632D /* AppDelegate.swift */,
-				C410F0B1233D2B3700AF632D /* SceneDelegate.swift */,
 				C410F0B8233D2B3B00AF632D /* Assets.xcassets */,
+				C410F0C0233D2B3B00AF632D /* Info.plist */,
 				C410F0BD233D2B3B00AF632D /* LaunchScreen.storyboard */,
 				C410F0D7233DC8C800AF632D /* Models */,
 				C410F0BA233D2B3B00AF632D /* Preview Content */,
+				C410F0B1233D2B3700AF632D /* SceneDelegate.swift */,
 				C410F0D8233DC9A900AF632D /* Views */,
 			);
 			path = ShoppingList;

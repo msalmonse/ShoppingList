@@ -22,7 +22,9 @@ struct EntriesView: View {
 
     @FetchRequest(
         entity: Entry.entity(),
-        sortDescriptors: []
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Entry.name, ascending: true)
+        ]
     )
     var entries: FetchedResults<Entry>
 
