@@ -14,7 +14,7 @@ extension Product {
         if manufacturer == nil {
             return name!
         } else {
-            return "\(manufacturer!) \(name!)"
+            return "\(name!) (\(manufacturer!))"
         }
     }
 }
