@@ -33,7 +33,7 @@ struct ProductsView: View {
 
     var body: some View {
         VStack {
-            List(products, id: \.self) { product in
+            List(products, id: \.id) { product in
                 ProductRow(product: product, categories: self.categories)
             }
             Button(
@@ -96,7 +96,7 @@ struct ProductRow: View {
                         VStack(alignment: .trailing) {
                             Text(product.category?.name ?? "")
                             .font(.caption)
-                                .layoutPriority(1.0)
+                            .layoutPriority(1.0)
                         }
                         Image(systemName: "chevron.right")
                     }

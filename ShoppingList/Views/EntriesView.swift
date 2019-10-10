@@ -71,7 +71,7 @@ struct EntriesView: View {
     var body: some View {
         VStack(alignment: .leading) {
             SelectedCategoryView(index: $categoryIndex, categories: categories)
-            .padding(.top, 5)
+            .padding(.top, 10)
             SelectedStoreView(index: $storeIndex, stores: stores)
             List(entries.filter({ $0.combinedFilter(selectedStore, selectedCategory) }), id: \.id) {
                 EntryRow(

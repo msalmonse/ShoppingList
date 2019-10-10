@@ -33,7 +33,7 @@ struct StoresView: View {
 
     var body: some View {
         VStack {
-            List(stores, id: \.self) { store in
+            List(stores, id: \.id) { store in
                 StoreRow(store: store, categories: self.categories)
             }
             Button(

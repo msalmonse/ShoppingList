@@ -26,7 +26,7 @@ struct CategoriesView: View {
 
     var body: some View {
         VStack {
-            List(categories, id: \.self) { category in
+            List(categories, id: \.id) { category in
                 CategoryRow(category: category)
             }
             Button(
