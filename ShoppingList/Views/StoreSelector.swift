@@ -38,10 +38,19 @@ struct StoreSelectorSheet: View {
     var body: some View {
         VStack {
             StoreSelector(index: $index, stores: stores)
-            Button(
-                action: { self.mode.wrappedValue.dismiss() },
-                label: { Text("Done") }
-            )
+            HStack {
+                Button(
+                    action: {
+                        self.index = -1
+                        self.mode.wrappedValue.dismiss()
+                    },
+                    label: { EncapsulatedText("Clear") }
+                )
+                Button(
+                    action: { self.mode.wrappedValue.dismiss() },
+                    label: { EncapsulatedText("Done") }
+                )
+            }
         }
     }
 }

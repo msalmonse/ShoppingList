@@ -86,10 +86,19 @@ struct CategorySelectorSheet: View {
     var body: some View {
         VStack {
             CategorySelector(index: $index, categories: categories)
-            Button(
-                action: { self.mode.wrappedValue.dismiss() },
-                label: { Text("Done") }
-            )
+            HStack {
+                Button(
+                    action: {
+                        self.index = -1
+                        self.mode.wrappedValue.dismiss()
+                    },
+                    label: { EncapsulatedText("Clear") }
+                )
+                Button(
+                    action: { self.mode.wrappedValue.dismiss() },
+                    label: { EncapsulatedText("Done") }
+                )
+            }
         }
     }
 }
