@@ -13,12 +13,12 @@ struct EntriesView: View {
     var managedObjectContext
 
     @FetchRequest(
-        entity: Product.entity(),
+        entity: Category.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \Product.name, ascending: true)
+            NSSortDescriptor(keyPath: \Category.name, ascending: true)
         ]
     )
-    var products: FetchedResults<Product>
+    var categories: FetchedResults<Category>
 
     @FetchRequest(
         entity: Entry.entity(),
@@ -29,6 +29,14 @@ struct EntriesView: View {
     var entries: FetchedResults<Entry>
 
     @FetchRequest(
+        entity: Product.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Product.name, ascending: true)
+        ]
+    )
+    var products: FetchedResults<Product>
+
+    @FetchRequest(
         entity: Store.entity(),
         sortDescriptors: [
             NSSortDescriptor(keyPath: \Store.name, ascending: true)
@@ -36,6 +44,8 @@ struct EntriesView: View {
     )
     var stores: FetchedResults<Store>
 
+    @State
+    var categoryIndex = -1
     @State
     var productIndex = -1
     @State
@@ -48,15 +58,22 @@ struct EntriesView: View {
         _ = entries.filter({ $0.completed }).map { self.managedObjectContext.delete($0) }
     }
 
-    func selectedStore() -> Store? {
+    var selectedCategory: Category? {
+        if !categories.indices.contains(categoryIndex) { return nil }
+        return categories[categoryIndex]
+    }
+
+    var selectedStore: Store? {
         if !stores.indices.contains(storeIndex) { return nil }
         return stores[storeIndex]
     }
 
     var body: some View {
         VStack(alignment: .leading) {
+            SelectedCategoryView(index: $categoryIndex, categories: categories)
+            .padding(.top, 5)
             SelectedStoreView(index: $storeIndex, stores: stores)
-            List(entries.filter({ $0.storeFilter(selectedStore()) }), id: \.self) {
+            List(entries.filter({ $0.combinedFilter(selectedStore, selectedCategory) }), id: \.id) {
                 EntryRow(
                     entry: $0,
                     products: self.products,
@@ -195,6 +212,36 @@ struct EntryRow: View {
     }
 }
 
+struct SelectedCategoryView: View {
+    @Binding
+    var index: Int
+    let categories: FetchedResults<Category>
+
+    @State
+    var trigger: Bool = false
+
+    var categoryTitle: String {
+        if !categories.indices.contains(index) { return "None" }
+        return categories[index].title
+    }
+
+    var body: some View {
+        HStack {
+            Button(
+                action: { self.trigger = true },
+                label: { ButtonText("Category: \(categoryTitle)") }
+            )
+            Spacer()
+            Image(systemName: "chevron.right")
+
+            Text("").hidden()
+            .sheet(isPresented: $trigger) {
+                CategorySelectorSheet(index: self.$index, categories: self.categories)
+            }
+        }
+    }
+}
+
 struct SelectedStoreView: View {
     @Binding
     var index: Int
@@ -222,11 +269,5 @@ struct SelectedStoreView: View {
                 StoreSelectorSheet(index: self.$index, stores: self.stores)
             }
         }
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        EntriesView()
     }
 }

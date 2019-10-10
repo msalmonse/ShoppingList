@@ -10,11 +10,21 @@ import Foundation
 import CoreData
 
 extension Entry {
-    func storeFilter(_ store: Store?) -> Bool {
-        if store == nil { return true }
-        // Check for no store selected, i.e. Any
-        if (stores?.count ?? 0) == 0 { return true }
-        return stores?.contains(store!) ?? true
+    func combinedFilter(_ store: Store?, _ category: Category?) -> Bool {
+        switch (category, store) {
+            // Both nil? Always true
+        case (nil, nil): return true
+        case (nil, _):
+            if (self.stores?.count ?? 0) == 0 { return true }
+            return self.stores?.contains(store!) ?? true
+        case (_, nil):
+            if self.category == nil { return true }
+            return self.category == category
+        default:
+            if self.category == nil { return combinedFilter(store, nil) }
+            if (self.stores?.count ?? 0) == 0 { return combinedFilter(nil, category) }
+            return self.category == category && (self.stores?.contains(store!) ?? true)
+        }
     }
 
     var anyStore: Store? {

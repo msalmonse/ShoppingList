@@ -74,3 +74,22 @@ struct CategoriesListRow: View {
         }
     }
 }
+
+struct CategorySelectorSheet: View {
+    @Binding
+    var index: Int
+    let categories: FetchedResults<Category>
+
+    @Environment(\.presentationMode)
+    var mode: Binding<PresentationMode>
+
+    var body: some View {
+        VStack {
+            CategorySelector(index: $index, categories: categories)
+            Button(
+                action: { self.mode.wrappedValue.dismiss() },
+                label: { Text("Done") }
+            )
+        }
+    }
+}
