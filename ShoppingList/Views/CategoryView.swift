@@ -69,7 +69,7 @@ struct CategoryRow: View {
                 label: {
                     HStack {
                         VStack(alignment: .leading) {
-                            ButtonText(self.category.name ?? "").font(.headline)
+                            Text(self.category.name ?? "").font(.headline)
                         }
                         Spacer()
                         Image(systemName: "chevron.right")

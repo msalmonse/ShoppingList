@@ -8,20 +8,6 @@
 
 import SwiftUI
 
-struct ButtonText: View {
-    let text: String
-    let disabled: Bool
-
-    init(_ text: String, _ disabled: Bool = false) {
-        self.text = text
-        self.disabled = disabled
-    }
-    var body: some View {
-        Text(text)
-        .foregroundColor(disabled ? .secondary : .primary)
-    }
-}
-
 struct EncapsulatedText: View {
     let text: String
     let disabled: Bool
@@ -43,6 +29,13 @@ struct EncapsulatedText: View {
         .clipShape(Capsule())
         .overlay(Capsule().strokeBorder(lineWidth: 1.0).foregroundColor(.secondary))
         .padding(5)
+    }
+}
+
+struct ShrinkPressed: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
     }
 }
 

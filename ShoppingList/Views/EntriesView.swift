@@ -91,6 +91,7 @@ struct EntriesView: View {
                     action: { self.trigger = true },
                     label: { EncapsulatedText("New Entry") }
                 )
+                .buttonStyle(ShrinkPressed())
                 Spacer()
                 Text("").hidden()
                 .sheet(isPresented: $trigger) {
@@ -229,10 +230,13 @@ struct SelectedCategoryView: View {
         HStack {
             Button(
                 action: { self.trigger = true },
-                label: { ButtonText("Category: \(categoryTitle)") }
+                label: {
+                    Text("Category: \(categoryTitle)")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                }
             )
-            Spacer()
-            Image(systemName: "chevron.right")
+            .buttonStyle(PlainButtonStyle())
 
             Text("").hidden()
             .sheet(isPresented: $trigger) {
@@ -259,10 +263,13 @@ struct SelectedStoreView: View {
         HStack {
             Button(
                 action: { self.trigger = true },
-                label: { ButtonText("Store: \(storeTitle())") }
+                label: {
+                    Text("Store: \(storeTitle())")
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                }
             )
-            Spacer()
-            Image(systemName: "chevron.right")
+            .buttonStyle(PlainButtonStyle())
 
             Text("").hidden()
             .sheet(isPresented: $trigger) {
