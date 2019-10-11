@@ -86,12 +86,14 @@ struct EntriesView: View {
                     action: { self.removeCompleted() },
                     label: { EncapsulatedText("Remove Completed") }
                 )
+                .buttonStyle(ShrinkPressed())
                 Spacer()
                 Button(
                     action: { self.trigger = true },
                     label: { EncapsulatedText("New Entry") }
                 )
                 .buttonStyle(ShrinkPressed())
+
                 Spacer()
                 Text("").hidden()
                 .sheet(isPresented: $trigger) {

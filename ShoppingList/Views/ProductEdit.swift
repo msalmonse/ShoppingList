@@ -65,10 +65,12 @@ struct ProductEdit: View {
                     },
                     label: { EncapsulatedText(cancelDone) }
                 )
+                .buttonStyle(ShrinkPressed())
                 Button(
                     action: { self.updateProduct() },
                     label: { EncapsulatedText(self.product.label, self.product.name.isEmpty) }
                 )
+                .buttonStyle(ShrinkPressed())
                 .disabled(self.product.name.isEmpty)
             }
         }

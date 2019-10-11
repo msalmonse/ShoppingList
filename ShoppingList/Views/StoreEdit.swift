@@ -67,10 +67,12 @@ struct StoreEdit: View {
                     action: { self.mode.wrappedValue.dismiss() },
                     label: { EncapsulatedText(cancelDone) }
                 )
+                .buttonStyle(ShrinkPressed())
                 Button(
                     action: { self.updateStore() },
                     label: { EncapsulatedText(self.store.label) }
                 )
+                .buttonStyle(ShrinkPressed())
                 .disabled(self.store.name.isEmpty)
             }
         }

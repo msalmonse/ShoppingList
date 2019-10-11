@@ -35,6 +35,8 @@ struct CategoriesView: View {
                 },
                 label: { EncapsulatedText("New Category") }
             )
+            .buttonStyle(ShrinkPressed())
+
             Text("").hidden()
             .sheet(isPresented: $trigger) {
                 CategoryEdit(

@@ -70,10 +70,12 @@ struct EntryEdit: View {
                     },
                     label: { EncapsulatedText(cancelDone) }
                 )
+                .buttonStyle(ShrinkPressed())
                 Button(
                     action: { self.updateEntry() },
                     label: { EncapsulatedText(self.entry.label) }
                 )
+                .buttonStyle(ShrinkPressed())
                 .disabled(self.entry.quantity.isEmpty && self.productIndex > 0)
             }
         }

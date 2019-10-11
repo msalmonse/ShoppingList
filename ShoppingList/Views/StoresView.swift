@@ -40,6 +40,8 @@ struct StoresView: View {
                 action: { self.trigger = true },
                 label: { EncapsulatedText("New Store") }
             )
+            .buttonStyle(ShrinkPressed())
+
             Text("").hidden()
             .sheet(isPresented: $trigger) {
                 StoreEdit(

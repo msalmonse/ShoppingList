@@ -42,6 +42,8 @@ struct ProductsView: View {
                 },
                 label: { EncapsulatedText("New Product") }
             )
+            .buttonStyle(ShrinkPressed())
+
             Text("").hidden()
             .sheet(isPresented: $trigger) {
                 ProductEdit(

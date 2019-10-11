@@ -60,6 +60,7 @@ struct CategoryToggle: View {
             },
             label: { EncapsulatedText("\(category.included ? "Remove" : "Add") Category") }
         )
+        .buttonStyle(ShrinkPressed())
     }
 }
 
@@ -94,10 +95,12 @@ struct CategorySelectorSheet: View {
                     },
                     label: { EncapsulatedText("Clear") }
                 )
+                .buttonStyle(ShrinkPressed())
                 Button(
                     action: { self.mode.wrappedValue.dismiss() },
                     label: { EncapsulatedText("Done") }
                 )
+                .buttonStyle(ShrinkPressed())
             }
         }
     }

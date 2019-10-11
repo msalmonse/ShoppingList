@@ -51,10 +51,12 @@ struct CategoryEdit: View {
                     },
                     label: { EncapsulatedText(cancelDone) }
                 )
+                .buttonStyle(ShrinkPressed())
                 Button(
                     action: { self.updateCategory() },
                     label: { EncapsulatedText(self.category.label) }
                 )
+                .buttonStyle(ShrinkPressed())
                 .disabled(category.name.isEmpty)
             }
         }

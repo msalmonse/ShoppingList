@@ -46,10 +46,12 @@ struct StoreSelectorSheet: View {
                     },
                     label: { EncapsulatedText("Clear") }
                 )
+                .buttonStyle(ShrinkPressed())
                 Button(
                     action: { self.mode.wrappedValue.dismiss() },
                     label: { EncapsulatedText("Done") }
                 )
+                .buttonStyle(ShrinkPressed())
             }
         }
     }
