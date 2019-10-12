@@ -33,7 +33,18 @@ struct Settings: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            Spacer()
+            HStack {
+                Text("Chosen Category:")
+                .frame(width: 160, alignment: .trailing)
+                Text(UserSettings.chosenCategory)
+            }
+            HStack {
+                Text("Chosen Store:")
+                .frame(width: 160, alignment: .trailing)
+                Text(UserSettings.chosenStore)
+            }
             Spacer()
             Text(nameVersion)
         }
