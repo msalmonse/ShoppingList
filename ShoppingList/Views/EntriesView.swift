@@ -224,20 +224,20 @@ struct SelectedCategoryView: View {
     var trigger: Bool = false
 
     var categoryTitle: String {
-        let categoryName = UserSettings.chosenCategory
+        let categoryTitle = UserSettings.chosenCategory
         if index == -2 {
-            if categoryName.isEmpty {
+            if categoryTitle.isEmpty {
                 index = -1
             } else {
-                index = categories.firstIndex(where: { $0.name == categoryName }) ?? -1
+                index = categories.firstIndex(where: { $0.title == categoryTitle }) ?? -1
             }
         }
         if !categories.indices.contains(index) {
-            if categoryName != "" { UserSettings.chosenCategory = "" }
+            if categoryTitle != "" { UserSettings.chosenCategory = "" }
             return "None"
         }
         let title = categories[index].title
-        if categoryName != title { UserSettings.chosenCategory = title }
+        if categoryTitle != title { UserSettings.chosenCategory = title }
         return title
     }
 
@@ -270,20 +270,20 @@ struct SelectedStoreView: View {
     var trigger: Bool = false
 
     func storeTitle() -> String {
-        let storeName = UserSettings.chosenStore
+        let storeTitle = UserSettings.chosenStore
         if index == -2 {
-            if storeName.isEmpty {
+            if storeTitle.isEmpty {
                 index = -1
             } else {
-                index = stores.firstIndex(where: { $0.name == storeName }) ?? -1
+                index = stores.firstIndex(where: { $0.name == storeTitle }) ?? -1
             }
         }
         if !stores.indices.contains(index) {
-            if storeName != "" { UserSettings.chosenStore = "" }
+            if storeTitle != "" { UserSettings.chosenStore = "" }
             return "Any"
         }
         let title = stores[index].title
-        if storeName != title { UserSettings.chosenStore = title }
+        if storeTitle != title { UserSettings.chosenStore = title }
         return title
     }
 
