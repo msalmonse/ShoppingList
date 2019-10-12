@@ -15,6 +15,9 @@ final class UserSettings: ObservableObject, Identifiable {
     let id = UUID()
     let objectWillChange = ObservableObjectPublisher()
 
+    @UserDefault("ChosenCategory", defaultValue: "")
+    var chosenCategory: String
+
     @UserDefault("ChosenStore", defaultValue: "")
     var chosenStore: String
 
@@ -22,5 +25,15 @@ final class UserSettings: ObservableObject, Identifiable {
 }
 
 extension UserSettings {
-    static var global = UserSettings()
+    private static var global = UserSettings()
+
+    static var chosenCategory: String {
+        get { global.chosenCategory }
+        set { global.chosenCategory = newValue }
+    }
+
+    static var chosenStore: String {
+        get { global.chosenStore }
+        set { global.chosenStore = newValue }
+    }
 }
