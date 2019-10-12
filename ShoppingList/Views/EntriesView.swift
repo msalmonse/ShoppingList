@@ -45,11 +45,11 @@ struct EntriesView: View {
     var stores: FetchedResults<Store>
 
     @State
-    var categoryIndex = -1
+    var categoryIndex = -2          // Lookup category from UserSettings
     @State
     var productIndex = -1
     @State
-    var storeIndex = -1
+    var storeIndex = -2             // Lookup store from UserSettings
 
     @State
     var trigger = false
@@ -126,7 +126,7 @@ struct EntryRow: View {
     @State
     var productIndex = -1
     @State
-    var storeIndex = -1
+    var storeIndex = -2
     @State
     var trigger = false
 
@@ -257,8 +257,21 @@ struct SelectedStoreView: View {
     var trigger: Bool = false
 
     func storeTitle() -> String {
-        if !stores.indices.contains(index) { return "Any" }
-        return stores[index].title
+        let storeName = UserSettings.global.chosenStore
+        if index == -2 {
+            if storeName.isEmpty {
+                index = -1
+            } else {
+                index = stores.firstIndex(where: { $0.name == storeName }) ?? -1
+            }
+        }
+        if !stores.indices.contains(index) {
+            if storeName != "" { UserSettings.global.chosenStore = "" }
+            return "Any"
+        }
+        let title = stores[index].title
+        if storeName != title { UserSettings.global.chosenStore = title }
+        return title
     }
 
     var body: some View {

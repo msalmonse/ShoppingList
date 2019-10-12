@@ -16,9 +16,11 @@ final class UserSettings: ObservableObject, Identifiable {
     let objectWillChange = ObservableObjectPublisher()
 
     @UserDefault("ChosenStore", defaultValue: "")
-    var chosenStore: String {
-        willSet { objectWillChange.send() }
-    }
+    var chosenStore: String
 
     init() { return }
+}
+
+extension UserSettings {
+    static var global = UserSettings()
 }
