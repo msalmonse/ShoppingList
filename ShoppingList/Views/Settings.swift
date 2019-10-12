@@ -11,7 +11,7 @@ import SwiftUI
 
 struct Settings: View {
     @ObservedObject
-    var settings = UserSettings()
+    var settings = UserSettings.global
     let nameVersion: String
 
     init() {
@@ -38,12 +38,12 @@ struct Settings: View {
             HStack {
                 Text("Chosen Category:")
                 .frame(width: 160, alignment: .trailing)
-                Text(UserSettings.chosenCategory)
+                Text(settings.chosenCategory)
             }
             HStack {
                 Text("Chosen Store:")
                 .frame(width: 160, alignment: .trailing)
-                Text(UserSettings.chosenStore)
+                Text(settings.chosenStore)
             }
             Spacer()
             Text(nameVersion)

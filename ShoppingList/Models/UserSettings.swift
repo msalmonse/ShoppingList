@@ -16,16 +16,20 @@ final class UserSettings: ObservableObject, Identifiable {
     let objectWillChange = ObservableObjectPublisher()
 
     @UserDefault("ChosenCategory", defaultValue: "")
-    var chosenCategory: String
+    var chosenCategory: String {
+        willSet { objectWillChange.send() }
+    }
 
     @UserDefault("ChosenStore", defaultValue: "")
-    var chosenStore: String
+    var chosenStore: String {
+        willSet { objectWillChange.send() }
+    }
 
     init() { return }
 }
 
 extension UserSettings {
-    private static var global = UserSettings()
+    static var global = UserSettings()
 
     static var chosenCategory: String {
         get { global.chosenCategory }
