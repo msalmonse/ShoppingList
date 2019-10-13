@@ -59,7 +59,7 @@ struct EntryEdit: View {
     var body: some View {
         VStack {
             Spacer()
-            StoreSelector(index: $storeIndex, stores: stores)
+            StoreSelector(index: $storeIndex, stores: stores, category: nil)
             ProductSelector(index: $productIndex, products: products)
             InputText("Description", text: $entry.quantity, onCommit: { self.updateEntry() })
             Spacer()

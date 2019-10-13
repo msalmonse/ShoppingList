@@ -11,6 +11,15 @@ import CoreData
 
 extension Category {
     var title: String { return name ?? "" }
+
+    /// Check to see if the store contains us
+    /// - Parameter store: Optional Store
+    func storeFilter(_ store: Store?) -> Bool {
+        if store == nil { return true }
+        if store!.categories == nil { return true }
+        if store!.categories!.count == 0 { return true }
+        return store!.categories!.contains(self)
+    }
 }
 
 // Class used to edit or add a category
@@ -25,6 +34,7 @@ class EditableCategory: ObservableObject, Identifiable {
     @Published
     var name: String
 
+    /// Update category from the class
     func update() {
         if category != nil {
             category!.name = name

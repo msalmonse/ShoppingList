@@ -56,7 +56,7 @@ struct ProductEdit: View {
                 text: $product.manufacturer,
                 onCommit: { self.updateProduct() }
             )
-            CategorySelector(index: $product.categoryIndex, categories: categories)
+            CategorySelector(index: $product.categoryIndex, categories: categories, store: nil)
             Spacer()
             HStack {
                 Button(

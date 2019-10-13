@@ -18,10 +18,20 @@ extension Store {
         }
     }
 
+    /// The names of all the categories of this store
     var allCategoryNames: [String] {
         if categories == nil { return [] }
         let set = categories as! Set<Category>      // swiftlint:disable:this force_cast
         return set.map({ $0.name! }).sorted()
+    }
+
+    /// Check to see if the store contains the category
+    /// - Parameter category: Optional Category
+    func categoryFilter(_ category: Category?) -> Bool {
+        if category == nil { return true }
+        if category!.stores == nil { return true }
+        if category!.stores!.count == 0 { return true }
+        return category!.stores!.contains(self)
     }
 }
 

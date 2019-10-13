@@ -12,13 +12,14 @@ struct StoreSelector: View {
     @Binding
     var index: Int
     let stores: FetchedResults<Store>
+    let category: Category?
 
     var body: some View {
         VStack {
             Picker(selection: $index, label: Text("")) {
                 Text("Any").tag(-1)
-                ForEach(stores.indices, id: \.self) { index in
-                    Text(self.stores[index].name ?? "").tag(index)
+                ForEach(stores.indices.filter {stores[$0].categoryFilter(category)}, id: \.self) {
+                    Text(self.stores[$0].name ?? "").tag($0)
                 }
             }
             Text("Store").bold()
@@ -31,13 +32,14 @@ struct StoreSelectorSheet: View {
     @Binding
     var index: Int
     let stores: FetchedResults<Store>
+    let category: Category?
 
     @Environment(\.presentationMode)
     var mode: Binding<PresentationMode>
 
     var body: some View {
         VStack {
-            StoreSelector(index: $index, stores: stores)
+            StoreSelector(index: $index, stores: stores, category: category)
             HStack {
                 Button(
                     action: {

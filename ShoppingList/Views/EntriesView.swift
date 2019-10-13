@@ -70,9 +70,9 @@ struct EntriesView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            SelectedCategoryView(index: $categoryIndex, categories: categories)
+            SelectedCategoryView(index: $categoryIndex, categories: categories, store: selectedStore)
             .padding(.top, 10)
-            SelectedStoreView(index: $storeIndex, stores: stores)
+            SelectedStoreView(index: $storeIndex, stores: stores, category: selectedCategory)
             List(entries.filter({ $0.combinedFilter(selectedStore, selectedCategory) }), id: \.id) {
                 EntryRow(
                     entry: $0,
@@ -219,6 +219,7 @@ struct SelectedCategoryView: View {
     @Binding
     var index: Int
     let categories: FetchedResults<Category>
+    let store: Store?
 
     @State
     var trigger: Bool = false
@@ -255,7 +256,11 @@ struct SelectedCategoryView: View {
 
             Text("").hidden()
             .sheet(isPresented: $trigger) {
-                CategorySelectorSheet(index: self.$index, categories: self.categories)
+                CategorySelectorSheet(
+                    index: self.$index,
+                    categories: self.categories,
+                    store: self.store
+                )
             }
         }
     }
@@ -265,6 +270,7 @@ struct SelectedStoreView: View {
     @Binding
     var index: Int
     let stores: FetchedResults<Store>
+    let category: Category?
 
     @State
     var trigger: Bool = false
@@ -301,7 +307,11 @@ struct SelectedStoreView: View {
 
             Text("").hidden()
             .sheet(isPresented: $trigger) {
-                StoreSelectorSheet(index: self.$index, stores: self.stores)
+                StoreSelectorSheet(
+                    index: self.$index,
+                    stores: self.stores,
+                    category: self.category
+                )
             }
         }
     }
