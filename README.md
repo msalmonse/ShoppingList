@@ -16,7 +16,7 @@ Shopping list using Core Data for storage and SwiftUI
 
 ## Settings Tab
 
-There are no settings as yet.
+<img title="Home Tab" src="Images/settings.png" height="453" width="250">
 
 ## Core Data Schema
 
