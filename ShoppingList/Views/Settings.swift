@@ -35,21 +35,32 @@ struct Settings: View {
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
-            VStack(alignment: .leading) {
-                Text("Chosen")
-                HStack {
-                    Text("Category:")
-                    .frame(width: 80, alignment: .trailing)
-                    Text(settings.chosenCategory)
+            HStack {
+                Spacer()
+                VStack(alignment: .leading) {
+                    Text("Chosen")
+                    HStack {
+                        Text("Category:")
+                        .frame(width: 80, alignment: .trailing)
+                        Text(settings.chosenCategory)
+                    }
+                    HStack {
+                        Text("Store:")
+                        .frame(width: 80, alignment: .trailing)
+                        Text(settings.chosenStore)
+                    }
                 }
-                HStack {
-                    Text("Store:")
-                    .frame(width: 80, alignment: .trailing)
-                    Text(settings.chosenStore)
-                }
+                .frame(width: 250)
+                .modifier(RoundedBorder())
+                .layoutPriority(2.0)
+                Spacer()
             }
             Spacer()
-            Text(nameVersion)
+            HStack {
+                Spacer()
+                Text(nameVersion)
+                Spacer()
+            }
         }
     }
 }

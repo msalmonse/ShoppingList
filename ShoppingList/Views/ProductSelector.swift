@@ -23,6 +23,6 @@ struct ProductSelector: View {
             }
             Text("Product").bold()
         }
-        .modifier(PickerBorder())
+        .modifier(RoundedBorder())
     }
 }

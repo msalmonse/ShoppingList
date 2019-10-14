@@ -24,7 +24,7 @@ struct StoreSelector: View {
             }
             Text("Store").bold()
         }
-        .modifier(PickerBorder())
+        .modifier(RoundedBorder())
     }
 }
 

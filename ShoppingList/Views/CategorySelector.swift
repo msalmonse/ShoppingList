@@ -24,7 +24,7 @@ struct CategorySelector: View {
             }
             Text("Category").bold()
         }
-        .modifier(PickerBorder())
+        .modifier(RoundedBorder())
     }
 }
 
@@ -46,7 +46,7 @@ struct CategoriesSelector: View {
                 CategoryToggle(category: categoriesList[index])
             }
         }
-        .modifier(PickerBorder())
+        .modifier(RoundedBorder())
     }
 }
 

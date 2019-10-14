@@ -91,10 +91,10 @@ struct InputText: View {
 
 // border for pickers
 
-struct PickerBorder: ViewModifier {
+struct RoundedBorder: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(lineWidth: 1))
+            .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(lineWidth: 1))
             .padding(.horizontal, 5)
     }
 }
